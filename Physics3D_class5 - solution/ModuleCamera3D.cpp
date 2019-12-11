@@ -107,9 +107,11 @@ update_status ModuleCamera3D::Update(float dt)
 	else
 	{
 
+		//Get vehicle position
 
-
-		//App->physics->GetVehicle(0)->GetTransform();
+		App->physics->GetVehicle(0)->GetTransform(&followPoint);
+		LOG("%f, %f, %f", followPoint.M[13], followPoint.M[14], followPoint.M[15]);
+		//App->camera->LookAt(*a);
 	}
 	
 

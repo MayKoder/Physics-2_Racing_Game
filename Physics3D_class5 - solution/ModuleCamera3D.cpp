@@ -108,10 +108,38 @@ update_status ModuleCamera3D::Update(float dt)
 	{
 
 		//Get vehicle position
+		PhysVehicle3D* currVehicle = App->physics->GetVehicle(0);
+		currVehicle->GetTransform(&followPoint);
 
-		App->physics->GetVehicle(0)->GetTransform(&followPoint);
-		LOG("%f, %f, %f", followPoint.M[13], followPoint.M[14], followPoint.M[15]);
-		//App->camera->LookAt(*a);
+		const vec3 carPos = { followPoint.M[12], followPoint.M[13], followPoint.M[14] };
+		vec3 point = {followPoint.M[12], followPoint.M[13] + 6, followPoint.M[14] - 10};
+
+		vec3 carZVector = { currVehicle->vehicle->getForwardVector().getX(), currVehicle->vehicle->getForwardVector().getY(), currVehicle->vehicle->getForwardVector().getZ() };
+		//vec3 car3Vector = { currVehicle->vehicle->getUpAxis(), currVehicle->vehicle->getForwardVector().getY(), currVehicle->vehicle->getForwardVector().getZ() };
+
+		float angle = 90-(currVehicle->vehicle->getForwardVector().angle(btVector3(-X.x, -X.y, -X.z)) * RADTODEG);
+
+
+		//X = rotate(X, angle, vec3(0.0f, 1.0f, 0.0f));
+		//Y = rotate(Y, angle, vec3(0.0f, 1.0f, 0.0f));
+		//Z = rotate(Z, angle, vec3(0.0f, 1.0f, 0.0f));
+
+
+		Position = point;
+		//Position = point;
+		Look(point, carPos);
+
+
+		
+
+		//Reference = carPos;
+		//LookAt(carPos);
+
+		////Reference = carPos;
+		//Look(point, carPos, true);
+
+		
+		//LOG("%f", angle);
 	}
 	
 

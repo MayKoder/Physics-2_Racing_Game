@@ -114,32 +114,18 @@ update_status ModuleCamera3D::Update(float dt)
 		const vec3 carPos = { followPoint.M[12], followPoint.M[13], followPoint.M[14] };
 		vec3 point = {followPoint.M[12], followPoint.M[13] + 6, followPoint.M[14] - 10};
 
-		vec3 carZVector = { currVehicle->vehicle->getForwardVector().getX(), currVehicle->vehicle->getForwardVector().getY(), currVehicle->vehicle->getForwardVector().getZ() };
-		//vec3 car3Vector = { currVehicle->vehicle->getUpAxis(), currVehicle->vehicle->getForwardVector().getY(), currVehicle->vehicle->getForwardVector().getZ() };
-
-		float angle = 90-(currVehicle->vehicle->getForwardVector().angle(btVector3(-X.x, -X.y, -X.z)) * RADTODEG);
+		btVector3 carZVector = { currVehicle->vehicle->getForwardVector().getX(), 0, currVehicle->vehicle->getForwardVector().getZ() };
 
 
-		//X = rotate(X, angle, vec3(0.0f, 1.0f, 0.0f));
-		//Y = rotate(Y, angle, vec3(0.0f, 1.0f, 0.0f));
-		//Z = rotate(Z, angle, vec3(0.0f, 1.0f, 0.0f));
+		carZVector.normalize();  //Normalitzem el vector per a que tingui modul 1
+		carZVector *= -10;           //Tenim un vector que va 10 unitats darrera del cotxe, arran de terra
 
+		vec3 a = { carZVector.getX(), carZVector.getY(), carZVector.getZ()};
 
-		Position = point;
-		//Position = point;
-		Look(point, carPos);
+		Position = carPos + a + vec3(0.f, 6, 0.f);   //Podem ajustar l'alçada de la camara
 
+		LookAt(carPos);
 
-		
-
-		//Reference = carPos;
-		//LookAt(carPos);
-
-		////Reference = carPos;
-		//Look(point, carPos, true);
-
-		
-		//LOG("%f", angle);
 	}
 	
 

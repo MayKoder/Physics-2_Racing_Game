@@ -120,14 +120,10 @@ update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
 
-	//Kill car and respawn 
+	//Respawn car to last spawnPosition
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && !respawn)
 	{
-		//respawn = true;
-		//TODO: Needs to stop the car
-		//btTransform a = vehicle->vehicle->getChassisWorldTransform();
-		//a.setRotation(btQuaternion::getIdentity());
-		vehicle->SetPos(vehicle->info.spawnPoint.x, vehicle->info.spawnPoint.y, vehicle->info.spawnPoint.z);
+		RespawnCar();
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
@@ -163,6 +159,25 @@ update_status ModulePlayer::Update(float dt)
 	App->window->SetTitle(title);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::RespawnCar()
+{
+	mat4x4 carMatrix;
+	vehicle->GetTransform(&carMatrix);
+
+	//Correct position and rotation
+	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.rotate(0, { 1, 0, 0 });
+	carMatrix.rotate(0, { 0, 0, 1 });
+	carMatrix.translate(vehicle->info.spawnPoint.x, vehicle->info.spawnPoint.y, vehicle->info.spawnPoint.z);
+
+	//Set corrected transform
+	vehicle->SetTransform(&carMatrix.M[0]);
+
+	//Correct velocity (set to 0)
+	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 }
 
 

@@ -71,4 +71,21 @@ void ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s
 	map_objects.add(object);
 }
 
+void ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float height, Color s_color, float mass)
+{
+	Cylinder* object = new Cylinder();
+
+
+	
+	object->SetPos(position.x, position.y, position.z);
+	object->color = s_color;
+	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
+
+	object->height = height;
+	object->radius = radius;
+
+	App->physics->AddBody(*object, mass);
+	map_objects.add(object);
+}
+
 

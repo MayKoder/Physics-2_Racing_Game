@@ -21,7 +21,7 @@ bool ModuleMap::Start()
 	App->camera->LookAt(vec3(0, 0, 0));
 
 	//Create map
-	CreateRectangle({ 0, 2, 20 }, {60, 1, 0, 0}, { 5, 15, 0.2f }, White);
+	CreateSensor({ 0, 2, 20 }, {0, 0, 1, 0}, { 5, 15, 0.2f }, White);
 
 	return ret;
 }
@@ -57,7 +57,7 @@ void ModuleMap::OnCollision(PhysBody3D* body1, PhysBody3D* body2)
 {
 }
 
-void ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass)
+PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass)
 {
 
 	Cube* object = new Cube();
@@ -67,8 +67,8 @@ void ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, Color s
 	object->color = s_color;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
 
-	App->physics->AddBody(*object, mass);
 	map_objects.add(object);
+	return App->physics->AddBody(*object, mass);
 }
 
 void ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float height, Color s_color, float mass)
@@ -86,6 +86,11 @@ void ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float
 
 	App->physics->AddBody(*object, mass);
 	map_objects.add(object);
+}
+
+void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass)
+{
+	CreateRectangle(position, rotation, size, White, mass)->SetAsSensor(true);
 }
 
 

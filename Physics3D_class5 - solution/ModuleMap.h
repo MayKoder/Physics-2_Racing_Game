@@ -20,8 +20,9 @@ public:
 	bool CleanUp();
 
 	void OnCollision(PhysBody3D* body1, PhysBody3D* body2);
-	void CreateRectangle(vec3, vec4, vec3, Color, float mass = 0.f);
+	PhysBody3D* CreateRectangle(vec3, vec4, vec3, Color, float mass = 0.f);
 	void CreateCylinder(vec3, vec4, float, float, Color, float mass = 0.f);
+	void CreateSensor(vec3, vec4, vec3, Color, float mass = 0.f);
 
 public:
 	/*

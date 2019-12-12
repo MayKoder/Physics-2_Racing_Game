@@ -24,7 +24,7 @@ bool ModuleCamera3D::Start()
 {
 	LOG("Setting up the camera");
 	bool ret = true;
-	followCar = false;
+	followCar = true;
 
 	return ret;
 }
@@ -108,21 +108,18 @@ update_status ModuleCamera3D::Update(float dt)
 	{
 
 		//Get vehicle position
-		PhysVehicle3D* currVehicle = App->physics->GetVehicle(0);
 		currVehicle->GetTransform(&followPoint);
 
 		const vec3 carPos = { followPoint.M[12], followPoint.M[13], followPoint.M[14] };
-		vec3 point = {followPoint.M[12], followPoint.M[13] + 6, followPoint.M[14] - 10};
 
 		btVector3 carZVector = { currVehicle->vehicle->getForwardVector().getX(), 0, currVehicle->vehicle->getForwardVector().getZ() };
-
 
 		carZVector.normalize();  //Normalitzem el vector per a que tingui modul 1
 		carZVector *= -10;           //Tenim un vector que va 10 unitats darrera del cotxe, arran de terra
 
 		vec3 a = { carZVector.getX(), carZVector.getY(), carZVector.getZ()};
 
-		Position = carPos + a + vec3(0.f, 6, 0.f);   //Podem ajustar l'alçada de la camara
+		Position = carPos + a + vec3(0.f, 4, 0.f);   //Podem ajustar l'alçada de la camara
 
 		LookAt(carPos);
 

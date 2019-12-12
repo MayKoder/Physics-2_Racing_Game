@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "glmath.h"
+#include "PhysVehicle3D.h"
 
 class ModuleCamera3D : public Module
 {
@@ -25,6 +26,9 @@ private:
 public:
 	
 	vec3 X, Y, Z, Position, Reference;
+
+	//Car info
+	PhysVehicle3D* currVehicle;
 
 private:
 

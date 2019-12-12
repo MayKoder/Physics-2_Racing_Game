@@ -18,8 +18,10 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 
-	VehicleInfo car;
+	respawn = false;
 
+	VehicleInfo car;
+	
 	// Car properties ----------------------------------------
 	car.chassis_size.Set(2, 2, 4);
 	car.chassis_offset.Set(0, 1.5, 0);
@@ -95,9 +97,12 @@ bool ModulePlayer::Start()
 	car.wheels[3].drive = false;
 	car.wheels[3].brake = true;
 	car.wheels[3].steering = false;
+	
+	car.spawnPoint = {0, 2, 0};
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(0, 12, 0);
+	vehicle->SetPos(car.spawnPoint.x, car.spawnPoint.y, car.spawnPoint.z);
+	App->camera->currVehicle = vehicle;
 	
 	return true;
 }
@@ -114,6 +119,14 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
+
+	//Kill car and respawn 
+	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && !respawn)
+	{
+		//respawn = true;
+		//TODO: Needs to stop the car
+		vehicle->SetPos(vehicle->info.spawnPoint.x, vehicle->info.spawnPoint.y, vehicle->info.spawnPoint.z);
+	}
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{

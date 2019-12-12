@@ -136,6 +136,9 @@ update_status ModulePhysics3D::Update(float dt)
 		}
 	}
 
+	//Primitive* a = bodies.getFirst()->data->body.pri
+
+
 	return UPDATE_CONTINUE;
 }
 

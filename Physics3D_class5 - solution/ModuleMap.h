@@ -9,11 +9,11 @@
 struct PhysBody3D;
 struct PhysMotor3D;
 
-class ModuleSceneIntro : public Module
+class ModuleMap : public Module
 {
 public:
-	ModuleSceneIntro(Application* app, bool start_enabled = true);
-	~ModuleSceneIntro();
+	ModuleMap(Application* app, bool start_enabled = true);
+	~ModuleMap();
 
 	bool Start();
 	update_status Update(float dt);
@@ -41,4 +41,6 @@ public:
 
 	PhysMotor3D* left_wheel;
 	PhysMotor3D* right_wheel;
+
+	p2List<Primitive*> map_objects;
 };

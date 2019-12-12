@@ -125,6 +125,8 @@ update_status ModulePlayer::Update(float dt)
 	{
 		//respawn = true;
 		//TODO: Needs to stop the car
+		//btTransform a = vehicle->vehicle->getChassisWorldTransform();
+		//a.setRotation(btQuaternion::getIdentity());
 		vehicle->SetPos(vehicle->info.spawnPoint.x, vehicle->info.spawnPoint.y, vehicle->info.spawnPoint.z);
 	}
 

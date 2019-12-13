@@ -210,8 +210,8 @@ void ModulePlayer::RespawnCar()
 
 	//Correct position and rotation
 	carMatrix.rotate(0, { 0, 1, 0 });
-	carMatrix.rotate(0, { 1, 0, 0 });
-	carMatrix.rotate(0, { 0, 0, 1 });
+	//carMatrix.rotate(0, { 1, 0, 0 });
+	//carMatrix.rotate(0, { 0, 0, 1 });
 	carMatrix.translate(vehicle->info.spawnPoint.x, vehicle->info.spawnPoint.y, vehicle->info.spawnPoint.z);
 
 	//Set corrected transform

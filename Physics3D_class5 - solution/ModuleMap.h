@@ -25,6 +25,11 @@ public:
 	PhysBody3D* CreateRectangle(vec3, vec4, vec3, Color, float mass = 0.f);
 	void CreateCylinder(vec3, vec4, float, float, Color, float mass = 0.f);
 	void CreateSensor(vec3, vec4, vec3, Color, SensorType, vec3);
+	
+	void RotateCube(vec4 rotation);
+	void RotatePhysBody(PhysBody3D* body, vec4 rotation);
+	void RotatePrimitive(Primitive* cube_primitive, vec4 rotation);
+
 
 public:
 	/*

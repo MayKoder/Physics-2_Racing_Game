@@ -281,8 +281,8 @@ bool ModuleMap::Start()
 	CreateRectangle({ 0, 4, 60 }, { 80, 1, 0, 0 }, { 5, 15, 0.2f }, White);
 	CreateRectangle({ 0, 2, 82 }, { -85, 1, 0, 0 }, { 5, 42, 0.2f }, White);
 	//Last ramp
-	CreateRectangle({ -77,1,137 }, { 70,1,0,0 }, { 16,16,0.2f }, Blue);
-
+	CreateRectangle({ -77,1,137 }, { 80,0,1,1 }, { 16,16,0.2f }, Blue);
+	//RotateCube({ 50,0,0,1 });
 
 	return ret;
 }
@@ -331,6 +331,25 @@ PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, 
 
 	map_objects.add(object);
 	return App->physics->AddBody(*object, mass);
+}
+
+void ModuleMap::RotateCube(vec4 rotation)
+{
+	//RotatePrimitive(map_objects.getLast()->data, rotation);
+	//RotatePhysBody(App->physics->bodies.getLast()->data, rotation);
+}
+
+void ModuleMap::RotatePhysBody(PhysBody3D* body, vec4 rotation)
+{
+	mat4x4 rot_mat;
+	body->GetTransform(&rot_mat);
+	rot_mat.rotate(rotation.x, { rotation.y,rotation.z,rotation.w });
+	body->SetTransform(&rot_mat);
+}
+
+void ModuleMap::RotatePrimitive(Primitive* cube_primitive, vec4 rotation)
+{
+	cube_primitive->SetRotation(rotation.x, { rotation.y,rotation.z,rotation.w });
 }
 
 void ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float height, Color s_color, float mass)

@@ -284,9 +284,9 @@ bool ModuleMap::Start()
 	CreateRectangle({ -77,1,137 }, { 80,0,1,1 }, { 16,16,0.2f }, Blue);
 	//RotateCube({ 50,0,0,1 });
 
-	CreateSensor({ 0, 1, 10 }, { 0, 0, 0, 1 }, { 10, 2, 0.1f }, White, GRAVITYMOD, {0, 10, 0});
+	CreateSensor({ 0, 1, -10 }, { 0, 0, 0, 1 }, { 10, 2, 0.1f }, White, GRAVITYMOD, {0, 10, 0});
 
-	CreateRectangle({ 0, 20, 20}, { 0, 0, 0, 1 }, {50, 1, 50}, White);
+	CreateRectangle({ 0, 20, -20}, { 0, 0, 0, 1 }, {50, 1, 50}, White);
 
 	return ret;
 }

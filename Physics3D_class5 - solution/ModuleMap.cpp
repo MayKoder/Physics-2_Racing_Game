@@ -19,13 +19,11 @@ bool ModuleMap::Start()
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
+	App->audio->PlayMusic("music/DejaVu.ogg");
 
-	//Create map
-	//CreateSensor({ 0, 2, 20 }, {0, 0, 1, 0}, { 5, 15, 0.2f }, White);
 	//Create map
 	//Left side limits ------------------------------------------------------------------------------------------------------
 	//Height 3 - Map start
-		//Height 3 - Map start
 	CreateRectangle({ 7,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
 	CreateRectangle({ 7,1,3 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
 	CreateRectangle({ 7,1,6 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
@@ -289,9 +287,8 @@ bool ModuleMap::Start()
 	CreateRectangle({ -130,45,137 }, { 0,0,0,1 }, { 20,0.2f,50 }, White);
 	CreateSensor({ -130,45,97 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,-10,0 });
 
-
+	//Test
 	CreateSensor({ 0, 1, -10 }, { 0, 0, 0, 1 }, { 10, 2, 0.1f }, White, GRAVITYMOD, {0, 10, 0});
-
 	CreateRectangle({ 0, 20, -20}, { 0, 0, 0, 1 }, {50, 1, 50}, White);
 
 	return ret;

@@ -115,6 +115,33 @@ bool ModulePlayer::CleanUp()
 	return true;
 }
 
+update_status ModulePlayer::PreUpdate(float dt)
+{
+	if (vehicle->rotating)
+	{
+		float increment = 5.f;
+		if (vehicle->current_angle + increment <= vehicle->target_angle)
+		{
+			vehicle->current_angle += increment;
+		}
+		else
+		{
+			vehicle->current_angle = vehicle->target_angle;
+			vehicle->rotating = false;
+			vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+		}
+
+		mat4x4 carMatrix;
+		vehicle->GetTransform(&carMatrix);
+		//Correct position and rotation
+		carMatrix.rotate(vehicle->current_angle, vehicle->axis);
+		//Set corrected transform
+		vehicle->SetTransform(&carMatrix.M[0]);
+	}
+	return UPDATE_CONTINUE;
+}
+
+
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
@@ -177,6 +204,7 @@ update_status ModulePlayer::Update(float dt)
 
 void ModulePlayer::RespawnCar()
 {
+	App->physics->SetGravity({GRAVITY.getX(), GRAVITY.getY(), GRAVITY.getZ()});
 	mat4x4 carMatrix;
 	vehicle->GetTransform(&carMatrix);
 
@@ -192,6 +220,9 @@ void ModulePlayer::RespawnCar()
 	//Correct velocity (set to 0)
 	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
 	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	vehicle->rotating = false;
+	vehicle->current_angle = 0;
 }
 
 

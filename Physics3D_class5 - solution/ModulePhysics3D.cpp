@@ -87,17 +87,44 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 			PhysBody3D* pbodyA = (PhysBody3D*)obA->getUserPointer();
 			PhysBody3D* pbodyB = (PhysBody3D*)obB->getUserPointer();
 
+			if ((pbodyA && pbodyA->IsSensor()) || (pbodyB && pbodyB->IsSensor()))
+			{
+				PhysSensor3D* sensor = nullptr;
+				if (pbodyA && pbodyA->IsSensor())
+				{
+					sensor = (PhysSensor3D*)pbodyA;
+				}
+				else if(pbodyB && pbodyB->IsSensor())
+				{
+					sensor = (PhysSensor3D*)pbodyB;
+				}
+
+				switch (sensor->type)
+				{
+				case GRAVITYMOD:
+					if (!App->player->vehicle->rotating) 
+					{
+						SetGravity(sensor->gravityMod);
+						btVector3 A = App->player->vehicle->vehicle->getForwardVector();
+						vec3 aaaaaaaa = { A.getX(), A.getY() , A.getZ() };
+						App->player->vehicle->SmoothRotation(180, aaaaaaaa);
+					}
+					break;
+				}
+
+			}
+
 			if(pbodyA && pbodyB)
 			{
 				p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
-				while(item)
+				while (item)
 				{
 					item->data->OnCollision(pbodyA, pbodyB);
 					item = item->next;
 				}
 
 				item = pbodyB->collision_listeners.getFirst();
-				while(item)
+				while (item)
 				{
 					item->data->OnCollision(pbodyB, pbodyA);
 					item = item->next;
@@ -107,6 +134,11 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 	}
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePhysics3D::SetGravity(const vec3 v) 
+{
+	world->setGravity({v.x, v.y, v.z});
 }
 
 // ---------------------------------------------------------
@@ -248,6 +280,32 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
 
 	return pbody;
 }
+PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, const vec3 gravityMod, const SensorType s_type) 
+{
+	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x * 0.5f, cube.size.y * 0.5f, cube.size.z * 0.5f));
+	shapes.add(colShape);
+
+	btTransform startTransform;
+	startTransform.setFromOpenGLMatrix(&cube.transform);
+
+	btVector3 localInertia(0, 0, 0);
+
+	btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
+	motions.add(myMotionState);
+	btRigidBody::btRigidBodyConstructionInfo rbInfo(0.f, myMotionState, colShape, localInertia);
+
+	btRigidBody* body = new btRigidBody(rbInfo);
+	PhysSensor3D* pbody = new PhysSensor3D(body, s_type);
+	pbody->gravityMod = gravityMod;
+	pbody->SetAsSensor(true);
+
+	body->setUserPointer(pbody);
+	world->addRigidBody(body);
+	bodies.add(pbody);
+
+	return pbody;
+}
+
 
 // ---------------------------------------------------------
 PhysBody3D* ModulePhysics3D::AddBody(const Cylinder& cylinder, float mass)

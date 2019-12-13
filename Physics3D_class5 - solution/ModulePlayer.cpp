@@ -167,14 +167,32 @@ update_status ModulePlayer::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		if(turn < TURN_DEGREES)
-			turn +=  TURN_DEGREES;
+		if (turn < TURN_DEGREES) 
+		{
+			if (App->camera->cameraOffset.y > 0) 
+			{
+				turn += TURN_DEGREES;
+			}
+			else
+			{
+				turn -= TURN_DEGREES;
+			}
+		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		if(turn > -TURN_DEGREES)
-			turn -= TURN_DEGREES;
+		if (turn > -TURN_DEGREES) 
+		{
+			if (App->camera->cameraOffset.y > 0)
+			{
+				turn -= TURN_DEGREES;
+			}
+			else
+			{
+				turn += TURN_DEGREES;
+			}
+		}
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)

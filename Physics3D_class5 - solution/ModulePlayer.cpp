@@ -157,7 +157,14 @@ update_status ModulePlayer::Update(float dt)
 	{
 		if (roundf(vehicle->GetKmh()) >= 0)
 		{
-			acceleration = MAX_ACCELERATION;
+			if (speed_bost)
+			{
+				acceleration = 3000.f;
+			}
+			else
+			{
+				acceleration = MAX_ACCELERATION;
+			}
 		}
 		else
 		{

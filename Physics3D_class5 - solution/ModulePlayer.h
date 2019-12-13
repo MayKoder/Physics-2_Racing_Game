@@ -29,4 +29,5 @@ public:
 	float acceleration;
 	float brake;
 	bool respawn;
+	bool speed_bost=false;
 };

@@ -10,7 +10,8 @@ class Module;
 enum SensorType {
 	CHECKPOINT,
 	GRAVITYMOD,
-	FINISHLINE
+	FINISHLINE,
+	SPEEDBOOST,
 };
 
 // =================================================

@@ -281,8 +281,14 @@ bool ModuleMap::Start()
 	CreateRectangle({ 0, 4, 60 }, { 80, 1, 0, 0 }, { 5, 15, 0.2f }, White);
 	CreateRectangle({ 0, 2, 82 }, { -85, 1, 0, 0 }, { 5, 42, 0.2f }, White);
 	//Last ramp
-	CreateRectangle({ -77,1,137 }, { 80,0,1,1 }, { 16,16,0.2f }, Blue);
-	//RotateCube({ 50,0,0,1 });
+	CreateRectangle({ -90,6,137 }, { -30,0,0,1 }, { 30,0.2f,14 }, Blue);
+	CreateSensor({ -50,1,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, SPEEDBOOST, { 0,10,0 });
+	CreateSensor({ -100,15,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, GRAVITYMOD, { 0,10,0 });
+
+	//Ceil
+	CreateRectangle({ -130,45,137 }, { 0,0,0,1 }, { 20,0.2f,50 }, White);
+	CreateSensor({ -130,45,97 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,-10,0 });
+
 
 	CreateSensor({ 0, 1, -10 }, { 0, 0, 0, 1 }, { 10, 2, 0.1f }, White, GRAVITYMOD, {0, 10, 0});
 
@@ -335,25 +341,6 @@ PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, 
 
 	map_objects.add(object);
 	return App->physics->AddBody(*object, mass);
-}
-
-void ModuleMap::RotateCube(vec4 rotation)
-{
-	//RotatePrimitive(map_objects.getLast()->data, rotation);
-	//RotatePhysBody(App->physics->bodies.getLast()->data, rotation);
-}
-
-void ModuleMap::RotatePhysBody(PhysBody3D* body, vec4 rotation)
-{
-	mat4x4 rot_mat;
-	body->GetTransform(&rot_mat);
-	rot_mat.rotate(rotation.x, { rotation.y,rotation.z,rotation.w });
-	body->SetTransform(&rot_mat);
-}
-
-void ModuleMap::RotatePrimitive(Primitive* cube_primitive, vec4 rotation)
-{
-	cube_primitive->SetRotation(rotation.x, { rotation.y,rotation.z,rotation.w });
 }
 
 void ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float height, Color s_color, float mass)

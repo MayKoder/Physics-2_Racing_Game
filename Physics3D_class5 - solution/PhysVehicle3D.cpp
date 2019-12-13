@@ -12,6 +12,8 @@ VehicleInfo::~VehicleInfo()
 // ----------------------------------------------------------------------------
 PhysVehicle3D::PhysVehicle3D(btRigidBody* body, btRaycastVehicle* vehicle, const VehicleInfo& info) : PhysBody3D(body), vehicle(vehicle), info(info)
 {
+	rotating = false;
+	current_angle = 0;
 }
 
 // ----------------------------------------------------------------------------
@@ -92,4 +94,11 @@ void PhysVehicle3D::Turn(float degrees)
 float PhysVehicle3D::GetKmh() const
 {
 	return vehicle->getCurrentSpeedKmHour();
+}
+
+void PhysVehicle3D::SmoothRotation(float target, vec3 s_axis) 
+{
+	rotating = true;
+	target_angle = target;
+	axis = s_axis;
 }

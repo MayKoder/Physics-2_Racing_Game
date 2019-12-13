@@ -152,6 +152,10 @@ bool ModuleMap::Start()
 	CreateRectangle({ 0, 4, 60 }, { 80, 1, 0, 0 }, { 5, 15, 0.2f }, White);
 	CreateRectangle({ 0, 2, 82 }, { -85, 1, 0, 0 }, { 5, 42, 0.2f }, White);
 
+
+	CreateSensor({ 0, 2.5f, -10}, { 0, 0, 0, 1 }, { 10, 5, 0.2f }, White, GRAVITYMOD,{0, 10, 0});
+
+
 	return ret;
 }
 
@@ -160,6 +164,7 @@ bool ModuleMap::CleanUp()
 {
 	LOG("Unloading Intro scene");
 	map_objects.clear();
+	map_sensors.clear();
 	return true;
 }
 
@@ -217,9 +222,17 @@ void ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float
 	map_objects.add(object);
 }
 
-void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_color, float mass)
+void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_color, SensorType s_type,vec3 mod)
 {
-	CreateRectangle(position, rotation, size, White, mass)->SetAsSensor(true);
+
+	Cube* object = new Cube();
+
+	object->SetPos(position.x, position.y, position.z);
+	object->size = size;
+	object->color = s_color;
+	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
+	map_sensors.add(App->physics->AddSensor(*object, mod, s_type));
+
 }
 
 

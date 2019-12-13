@@ -50,9 +50,16 @@ public:
 	void ApplyEngineForce(float force);
 	void Brake(float force);
 	void Turn(float degrees);
+	void SmoothRotation(float, vec3);
 	float GetKmh() const;
 public:
 
 	VehicleInfo info;
 	btRaycastVehicle* vehicle;
+
+public:
+	bool rotating;
+	float current_angle;
+	float target_angle;
+	vec3 axis;
 };

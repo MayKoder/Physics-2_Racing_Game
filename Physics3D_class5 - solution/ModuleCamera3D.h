@@ -35,4 +35,6 @@ private:
 	mat4x4 ViewMatrix, ViewMatrixInverse;
 	mat4x4 followPoint;
 	bool followCar;
+public:
+	vec3 cameraOffset;
 };

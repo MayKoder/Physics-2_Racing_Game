@@ -12,6 +12,9 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Y = vec3(0.0f, 1.0f, 0.0f);
 	Z = vec3(0.0f, 0.0f, 1.0f);
 
+
+
+	cameraOffset = { 0.f, 4.f, 0.f };
 	Position = vec3(0.0f, 0.0f, 5.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
 }
@@ -117,9 +120,9 @@ update_status ModuleCamera3D::Update(float dt)
 		carZVector.normalize();  //Normalitzem el vector per a que tingui modul 1
 		carZVector *= -10;           //Tenim un vector que va 10 unitats darrera del cotxe, arran de terra
 
-		vec3 a = { carZVector.getX(), carZVector.getY(), carZVector.getZ()};
+		vec3 carVectorVec3 = { carZVector.getX(), carZVector.getY(), carZVector.getZ()};
 
-		Position = carPos + a + vec3(0.f, 4, 0.f);   //Podem ajustar l'alçada de la camara
+		Position = carPos + carVectorVec3 + cameraOffset;   //Podem ajustar l'alçada de la camara
 
 		LookAt(carPos);
 

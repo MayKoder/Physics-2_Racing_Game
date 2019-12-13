@@ -223,6 +223,7 @@ void ModulePlayer::RespawnCar()
 
 	vehicle->rotating = false;
 	vehicle->current_angle = 0;
+	App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
 }
 
 

@@ -105,9 +105,10 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					if (!App->player->vehicle->rotating) 
 					{
 						SetGravity(sensor->gravityMod);
-						btVector3 A = App->player->vehicle->vehicle->getForwardVector();
-						vec3 aaaaaaaa = { A.getX(), 0, A.getZ() };
-						App->player->vehicle->SmoothRotation(180, aaaaaaaa);
+						btVector3 forward = App->player->vehicle->vehicle->getForwardVector();
+						vec3 forwardToVec3 = { forward.getX(), 0, forward.getZ() };
+						App->camera->cameraOffset = {0.f, (sensor->gravityMod.y * -1) + 6, 0.f};
+						App->player->vehicle->SmoothRotation(180, forwardToVec3);
 					}
 					break;
 				}

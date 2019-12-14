@@ -320,18 +320,117 @@ bool ModuleMap::Start()
 
 	//Ending wall walk
 	CreateSensor({ -44,50,-90 }, { 90,1,0,0 }, { 30,0.2f,30 }, White, GRAVITYMOD, { 0,0,-10 });
+
 	CreateRectangle({ -44,45.5f,-148 }, { 90,1,0,0 }, { 30,4,1 }, Red);
 	CreateRectangle({ -44,64.5f,-148 }, { 90,1,0,0 }, { 30,4,1 }, Red);
 	CreateRectangle({ -59,55,-148 }, { 90,1,0,0 }, { 1,4,20 }, Red);
+
 	CreateRectangle({ -44,55,-150 }, { 90,1,0,0 }, { 30,0.2f,20 }, White);
+
 	CreateRectangle({ -24,55,-150 }, { 90,1,0,0 }, { 30,0.2f,12 }, White);
+
 	CreateRectangle({ -4,55,-150 }, { 90,1,0,0 }, { 30,0.2f,7 }, White);
+
 	CreateRectangle({ 6,40,-150 }, { 90,1,0,0 }, { 10,0.2f,25 }, White);
 
-	//Wall walk opposite
-	CreateRectangle({ 6,30,-110 }, { 90,1,0,0 }, { 25,0.2f,10 }, White);
-	CreateRectangle({ 6,30,-110 }, { 90,1,0,0 }, { 25,0.2f,10 }, Blue);
+	CreateSensor({ 6,33,-150 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,0,10 });
 
+	//Wall walk opposite
+	CreateRectangle({ 6,24.5f,-112 }, { 90,1,0,0 }, { 25,4,1 }, Red);
+	CreateRectangle({ 6,5.5f,-112 }, { 90,1,0,0 }, { 25,4,1 }, Red);
+	CreateRectangle({ -6,15,-112 }, { 90,1,0,0 }, { 1,4,20 }, Red);
+
+	CreateRectangle({ 6,15,-110 }, { 90,1,0,0 }, { 25,0.2f,20 }, White);
+	CreateRectangle({ 20,15,-110 }, { 90,1,0,0 }, { 18,0.2f,7 }, White);
+	CreateSensor({ 35,15,-110 }, { 90,0,0,1 }, { 5,0.1f,10 }, White, GRAVITYMOD, { -10,0,0 });
+
+	CreateRectangle({ 29,15,-101 }, { 90,1,0,0 }, { 0.2f,18,7 }, White);
+	CreateRectangle({ 29,19,-101 }, { 90,1,0,0 }, { 3,18,1 }, Red);
+	CreateRectangle({ 29,11,-101 }, { 90,1,0,0 }, { 3,18,1 }, Red);
+	CreateRectangle({ 29,15,-85 }, { 90,1,0,0 }, { 0.2f,18,5 }, White);
+	CreateSensor({ 29,15,-80 }, { 90,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,-10,0 });
+
+
+
+	//Floor at last!
+	CreateRectangle({ 34,4,-65 }, { 0,1,0,0 }, { 15,0.2f,25 }, White);
+	CreateRectangle({ 34, 7.5, -50 }, { 60, 1, 0, 0 }, { 6, 15, 0.2f }, Yellow);
+	CreateRectangle({ 34,11.2f,-37.5f }, { 0,1,0,0 }, { 12,0.2f,12 }, White);
+	CreateRectangle({ 24, 14.2f, -37.5f }, { -30,0,0,1 }, { 15, 0.2f, 6 }, Yellow);
+	CreateRectangle({ 11.5f,17.9f,-37.5f }, { 0,1,0,0 }, { 12,0.2f,12 }, White);
+	CreateRectangle({ 11.5f,12.4f,-22.2f }, { 30,1,0,0 }, { 5,0.2f,22 }, Yellow);
+
+
+	//Last curves RIGHT
+	CreateRectangle({ 14.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 14.5,11.5,-23 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 14.5,11.5,-20 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 14.5,11.5,-17 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 14.5,11.5,-14 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 14.5,11.5,-11 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 14.5,11.5,-8 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 14.5,11.5,-5 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 22,11.5,1.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 22,11.5,-2.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 22,11.5,-5.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 22,11.5,-8.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 22,11.5,-11.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 22,11.5,-14.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+
+	CreateRectangle({ 17.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 20.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 23.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 26.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 29.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 32.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 35.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,-21.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,-18.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,-15.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,-12.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,-9.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,-6.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,-3.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,-0.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,2.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 37.5,11.5,4.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+
+	//Last curves LEFT
+	CreateRectangle({ 8.5,11.5,-24.5f }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 8.5,11.5,-23 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 8.5,11.5,-20 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 8.5,11.5,-17 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 8.5,11.5,-14 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 8.5,11.5,-11 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 8.5,11.5,-8 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+	CreateRectangle({ 8.5,11.5,-5 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 8.5,11.5,-2 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 8.5,11.5,1 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 8.5,11.5,4 }, { 0,0,0,1 }, { 1,3.f,2 }, Green);
+	CreateRectangle({ 10,11.5,4.5F }, { 0,0,0,1 }, { 2,3.f,1 }, Green);
+	CreateRectangle({ 13,11.5,4.5F }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 16,11.5,4.5F }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 19,11.5,4.5F }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+	CreateRectangle({ 22,11.5,4.5F }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
+
+	//LAST SPRINT
+	CreateRectangle({ 30, 10, 20 }, { 0, 0, 0, 1 }, { 15, 1, 30 }, White);
+	CreateRectangle({ 30, 10, 37.5f }, { 0, 0, 0, 1 }, { 5, 1, 5 }, White);
+	CreateRectangle({ 30, 10, 45 }, { 0, 0, 0, 1 }, { 15, 1, 10 }, White);
+	CreateRectangle({ 32.5f, 10, 55 }, { 0, 0, 0, 1 }, { 10, 1, 10 }, White);
+	CreateRectangle({ 27.5f, 10, 65 }, { 0, 0, 0, 1 }, { 10, 1, 10 }, White);
+	CreateRectangle({ 25, 10, 72.5f }, { 0, 0, 0, 1 }, { 5, 1, 5 }, White);
+	CreateRectangle({ 30, 10,78.5f }, { 0, 0, 0, 1 }, { 15, 1, 7 }, White);
+	CreateRectangle({ 30, 10, 91.5f }, { 0, 0, 0, 1 }, { 5, 1, 20 }, White);
+	CreateRectangle({ 30, 15, 110 }, { -30, 0.2f, 0, 0 }, { 5, 1, 20 }, Yellow);
+
+	//END PLATFORM
+	CreateRectangle({ 30, 25, 155 }, { 0, 0, 0, 1 }, { 10, 1, 10 }, White);
+	CreateRectangle({ 30, 26, 160 }, { 0, 0, 0, 1 }, { 10, 2, 1 }, Red);
+	CreateRectangle({ 30, 26, 150 }, { 0, 0, 0, 1 }, { 10, 2, 1 }, Red);
+	CreateRectangle({ 35, 26, 155 }, { 0, 0, 0, 1 }, { 1, 2, 10 }, Red);
+	CreateRectangle({ 25, 26, 155 }, { 0, 0, 0, 1 }, { 1, 2, 10 }, Red);
 
 	//Gravity tunnels
 	/*CreateSensor({ -25,55,-143 }, { 90,0,0,1 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,-10,0 });
@@ -341,7 +440,7 @@ bool ModuleMap::Start()
 
 	//Test
 	CreateSensor({ 0, 1, -10 }, { 0, 0, 0, 1 }, { 10, 2, 0.1f }, White, GRAVITYMOD, {0, 10, 0});
-	CreateRectangle({ 0, 19, -20}, { 0, 0, 0, 1 }, {50, 1, 50}, White);
+	CreateRectangle({ 23, 10, -10}, { 0, 0, 0, 1 }, {30, 1, 30}, White);
 
 	return ret;
 }

@@ -109,19 +109,22 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						btVector3 forward = App->player->vehicle->vehicle->getForwardVector();
 						vec3 forwardToVec3 = { forward.getX(), 0, forward.getZ() };
 						App->camera->cameraOffset = { 0.f, (sensor->gravityMod.y * -1) + 6, 0.f };
-						App->player->vehicle->SmoothRotation(180, forwardToVec3);
-						vec3 forwardToVec3 = { sensor->body->getWorldTransform().getBasis().getRow(2).getX(),  sensor->body->getWorldTransform().getBasis().getRow(2).getY(), sensor->body->getWorldTransform().getBasis().getRow(2).getZ() };
+						//vec3 forwardToVec3 = { sensor->body->getWorldTransform().getBasis().getRow(2).getX(),  sensor->body->getWorldTransform().getBasis().getRow(2).getY(), sensor->body->getWorldTransform().getBasis().getRow(2).getZ() };
+						
 						float a = 0.f;
+						float angle = 0.f;
 						if (sensor->gravityMod.y > 0)
 						{
 							a = (sensor->gravityMod.y * -1) + 6;
-							App->player->vehicle->SmoothRotation(180, forwardToVec3);
+							angle = 180.f;
 						}
 						else
 						{
 							a = (sensor->gravityMod.y * -1) - 4;
-							App->player->vehicle->SmoothRotation(0, { 0, 0, 1 });
+							angle = 0.f;
 						}
+						
+						App->player->vehicle->SmoothRotation(angle, forwardToVec3);
 						App->camera->cameraOffset = { 0.f, a, 0.f };
 						App->player->speed_bost = false;
 					}

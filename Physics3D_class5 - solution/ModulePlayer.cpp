@@ -120,24 +120,44 @@ update_status ModulePlayer::PreUpdate(float dt)
 {
 	if (vehicle->rotating)
 	{
-		float increment = 5.f;
-		if (vehicle->current_angle + increment <= vehicle->target_angle)
+		float increment;
+		//Code duplicated need cleaning
+		if (vehicle->target_angle > 0) 
 		{
-			vehicle->current_angle += increment;
+			increment = 5.f;
+			if (vehicle->current_angle + increment <= vehicle->target_angle)
+			{
+				vehicle->current_angle += increment;
+			}
+			else
+			{
+				vehicle->current_angle = vehicle->target_angle;
+				vehicle->rotating = false;
+				vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+			}
 		}
-		else
+		else if(vehicle->target_angle <= 0)
 		{
-			vehicle->current_angle = vehicle->target_angle;
-			vehicle->rotating = false;
-			vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+			increment = -5.f;
+			if (vehicle->current_angle + increment >= vehicle->target_angle)
+			{
+				vehicle->current_angle += increment;
+			}
+			else
+			{
+				vehicle->current_angle = vehicle->target_angle;
+				vehicle->rotating = false;
+				vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+			}
 		}
 
 		mat4x4 carMatrix;
 		vehicle->GetTransform(&carMatrix);
 		//Correct position and rotation
+		
 		carMatrix.rotate(vehicle->current_angle, vehicle->axis);
 		//Set corrected transform
-		vehicle->SetTransform(&carMatrix.M[0]);
+		vehicle->SetTransform(&carMatrix);
 	}
 	return UPDATE_CONTINUE;
 }

@@ -22,6 +22,7 @@ public:
 	bool CleanUp();
 
 	void RespawnCar();
+	void LastCheckPoint();
 
 public:
 

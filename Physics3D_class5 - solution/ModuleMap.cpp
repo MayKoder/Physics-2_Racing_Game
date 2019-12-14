@@ -285,11 +285,63 @@ bool ModuleMap::Start()
 
 	//Ceil
 	CreateRectangle({ -130,45,137 }, { 0,0,0,1 }, { 20,0.2f,50 }, White);
-	CreateSensor({ -130,45,97 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,-10,0 });
+	CreateSensor({ -130,45,107 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,-10,0 });
+	CreateRectangle({ -130,25,77 }, { 0,0,0,1 }, { 20,0.2f,30 }, White);
+
+	//Sky ramp
+	CreateRectangle({ -130,28,59 }, { -70,1,0,0 }, { 9,20,0.2f }, Blue);
+	CreateRectangle({ -130,31,42 }, { 0,0,0,1 }, { 9,0.2f,15 }, White);
+	CreateSensor({ -130,30,35 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,0,-10 });
+
+	//Wall walk
+	
+	CreateRectangle({ -130,40,22 }, { 90,1,0,0 }, { 9,0.2f,25 }, White);
+	CreateRectangle({ -130,56,22 }, { 90,1,0,0 }, { 25,0.2f,7 }, White);
+	CreateRectangle({ -122,62,22 }, { 90,1,0,0 }, { 9,0.2f,10 }, White);
+	CreateRectangle({ -138,67,22 }, { 90,1,0,0 }, { 9,0.2f,15 }, White);
+	CreateSensor({ -122,65,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,10,0 });
+
+	//Ceil 2
+	CreateRectangle({ -122,74,33 }, { 0,1,0,0 }, { 9,0.2f,25 }, White);
+	CreateRectangle({ -122,73,51 }, { -80,1,0,0 }, { 9,20,0.2f }, Blue);
+	CreateRectangle({ -122,72,69 }, { 90,1,0,0 }, { 16,16,1 }, White);
+	CreateRectangle({ -104,68,69 }, { -20,0,0,1 }, { 30,0.2f,9 }, Blue);
+
+	//Checkpoint mid and ramp
+	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,-10,0 });
+	CreateRectangle({ -44,19.6,69.7 }, { 0,0,0,1 }, { 23,40,19 }, White);
+	CreateSensor({ -44,45,57 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SPEEDBOOST, { 0,0,-10 });
+	CreateRectangle({ -44, 29.5f, 43 }, { 60, 1, 0, 0 }, { 12, 40, 0.2f }, Yellow);
+	CreateRectangle({ -44, 19.5f, 23 }, { 70, 1, 0, 0 }, { 12, 15, 0.2f }, Yellow);
+	CreateRectangle({ -44, 16.f, 10 }, { 80, 1, 0, 0 }, { 12, 15, 0.2f }, Yellow);
+	CreateRectangle({ -44, 15.5f, 0 }, { 90, 1, 0, 0 }, { 12, 15, 0.2f }, Yellow);
+	CreateRectangle({ -44, 16.f, -5 }, { 100, 1, 0, 0 }, { 12, 15, 0.2f }, Yellow);
+	CreateRectangle({ -44, 16.f, -10 }, { 120, 1, 0, 0 }, { 12, 25, 0.2f }, Yellow);
+
+	//Ending wall walk
+	CreateSensor({ -44,50,-90 }, { 90,1,0,0 }, { 30,0.2f,30 }, White, GRAVITYMOD, { 0,0,-10 });
+	CreateRectangle({ -44,45.5f,-148 }, { 90,1,0,0 }, { 30,4,1 }, Red);
+	CreateRectangle({ -44,64.5f,-148 }, { 90,1,0,0 }, { 30,4,1 }, Red);
+	CreateRectangle({ -59,55,-148 }, { 90,1,0,0 }, { 1,4,20 }, Red);
+	CreateRectangle({ -44,55,-150 }, { 90,1,0,0 }, { 30,0.2f,20 }, White);
+	CreateRectangle({ -24,55,-150 }, { 90,1,0,0 }, { 30,0.2f,12 }, White);
+	CreateRectangle({ -4,55,-150 }, { 90,1,0,0 }, { 30,0.2f,7 }, White);
+	CreateRectangle({ 6,40,-150 }, { 90,1,0,0 }, { 10,0.2f,25 }, White);
+
+	//Wall walk opposite
+	CreateRectangle({ 6,30,-110 }, { 90,1,0,0 }, { 25,0.2f,10 }, White);
+	CreateRectangle({ 6,30,-110 }, { 90,1,0,0 }, { 25,0.2f,10 }, Blue);
+
+
+	//Gravity tunnels
+	/*CreateSensor({ -25,55,-143 }, { 90,0,0,1 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,-10,0 });
+	CreateSensor({ -15,55,-143 }, { 90,0,0,1 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,0,10 });
+	CreateSensor({ -5,55,-143 }, { 90,0,0,1 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,10,0 });
+	CreateSensor({ 5,55,-143 }, { 90,0,0,1 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,0,-10 });*/
 
 	//Test
 	CreateSensor({ 0, 1, -10 }, { 0, 0, 0, 1 }, { 10, 2, 0.1f }, White, GRAVITYMOD, {0, 10, 0});
-	CreateRectangle({ 0, 20, -20}, { 0, 0, 0, 1 }, {50, 1, 50}, White);
+	CreateRectangle({ 0, 19, -20}, { 0, 0, 0, 1 }, {50, 1, 50}, White);
 
 	return ret;
 }

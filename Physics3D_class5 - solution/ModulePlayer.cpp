@@ -173,6 +173,10 @@ update_status ModulePlayer::Update(float dt)
 	{
 		RespawnCar();
 	}
+	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && !respawn)
+	{
+		LastCheckPoint();
+	}
 
 	if(App->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 	{
@@ -259,6 +263,31 @@ void ModulePlayer::RespawnCar()
 	//carMatrix.rotate(0, { 1, 0, 0 });
 	//carMatrix.rotate(0, { 0, 0, 1 });
 	carMatrix.translate(vehicle->info.spawnPoint.x, vehicle->info.spawnPoint.y, vehicle->info.spawnPoint.z);
+
+	//Set corrected transform
+	vehicle->SetTransform(&carMatrix.M[0]);
+
+	//Correct velocity (set to 0)
+	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
+	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
+
+	vehicle->rotating = false;
+	vehicle->current_angle = 0;
+	App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
+	App->player->speed_bost = false;
+}
+
+void ModulePlayer::LastCheckPoint()
+{
+	App->physics->SetGravity({ GRAVITY.getX(), GRAVITY.getY(), GRAVITY.getZ() });
+	mat4x4 carMatrix;
+	vehicle->GetTransform(&carMatrix);
+
+	//Correct position and rotation
+	carMatrix.rotate(0, { 0, 1, 0 });
+	//carMatrix.rotate(0, { 1, 0, 0 });
+	//carMatrix.rotate(0, { 0, 0, 1 });
+	carMatrix.translate( -44,60,75);
 
 	//Set corrected transform
 	vehicle->SetTransform(&carMatrix.M[0]);

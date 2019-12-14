@@ -8,6 +8,7 @@
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled), vehicle(NULL)
 {
 	turn = acceleration = brake = 0.0f;
+	speed_bost = false;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -159,7 +160,7 @@ update_status ModulePlayer::Update(float dt)
 		{
 			if (speed_bost)
 			{
-				acceleration = 3000.f;
+				acceleration = MAX_BOOST_ACCELERATION;
 			}
 			else
 			{

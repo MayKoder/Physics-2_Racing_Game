@@ -119,10 +119,23 @@ update_status ModuleCamera3D::Update(float dt)
 		if (App->physics->GetGravity().getZ() < 0) 
 		{
 			carZVector.setX(0);
-			carZVector.setZ(-5);
+			carZVector.setZ(-3);
+		}
+		else if(App->physics->GetGravity().getZ() > 0)
+		{
+			carZVector.setX(0);
+			carZVector.setZ(3);
+		}
+		else if(App->physics->GetGravity().getX() < 0)
+		{
+			carZVector.setX(-3);
+			carZVector.setZ(0);
+		}
+		else
+		{
+			carZVector.normalize();  //Normalitzem el vector per a que tingui modul 1
 		}
 
-		carZVector.normalize();  //Normalitzem el vector per a que tingui modul 1
 		carZVector *= -10;           //Tenim un vector que va 10 unitats darrera del cotxe, arran de terra
 
 		vec3 carVectorVec3 = { carZVector.getX(), carZVector.getY(), carZVector.getZ()};

@@ -116,11 +116,17 @@ update_status ModuleCamera3D::Update(float dt)
 		const vec3 carPos = { followPoint.M[12], followPoint.M[13], followPoint.M[14] };
 
 		btVector3 carZVector = { currVehicle->vehicle->getForwardVector().getX(), 0, currVehicle->vehicle->getForwardVector().getZ() };
+		if (App->physics->GetGravity().getZ() < 0) 
+		{
+			carZVector.setX(0);
+			carZVector.setZ(-5);
+		}
 
 		carZVector.normalize();  //Normalitzem el vector per a que tingui modul 1
 		carZVector *= -10;           //Tenim un vector que va 10 unitats darrera del cotxe, arran de terra
 
 		vec3 carVectorVec3 = { carZVector.getX(), carZVector.getY(), carZVector.getZ()};
+		//carVectorVec3.z -= 10;
 
 		Position = carPos + carVectorVec3 + cameraOffset;   //Podem ajustar l'alçada de la camara
 

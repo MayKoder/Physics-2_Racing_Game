@@ -142,6 +142,24 @@ update_status ModulePlayer::PreUpdate(float dt)
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
+	{
+		App->camera->cameraOffset.z += 2;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
+	{
+		App->camera->cameraOffset.z -= 2;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_REPEAT)
+	{
+		App->camera->cameraOffset.y += 2;
+	}
+	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT)
+	{
+		App->camera->cameraOffset.y -= 2;
+	}
+
+
 	turn = acceleration = brake = 0.0f;
 	LOG("CAMERA OFFSET: %f", App->camera->cameraOffset.y);
 	//Respawn car to last spawnPosition

@@ -53,6 +53,7 @@ PhysSensor3D::PhysSensor3D(btRigidBody* body, SensorType s_type) : PhysBody3D(bo
 {
 	is_sensor = false;
 	type = s_type;
+	isEnabled = true;
 }
 PhysSensor3D::~PhysSensor3D()
 {

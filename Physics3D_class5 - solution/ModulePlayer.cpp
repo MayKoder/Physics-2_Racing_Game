@@ -126,19 +126,14 @@ update_status ModulePlayer::PreUpdate(float dt)
 		btQuaternion quat = rot.getRotation();
 		btVector3 axis = quat.getAxis();
 
-		if ((rot.getRotation().getAngle() + increment) * 180 / M_PI >= vehicle->target_angle) 
-		{
-			increment = (vehicle->target_angle * M_PI / 180) - rot.getRotation().getAngle();
-			vehicle->rotating = false;
-			vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
-		}
 
-		btVector3 rotAxis = {vehicle->axis.x, vehicle->axis.y , vehicle->axis.z};
-
-		quat.setRotation(rotAxis, increment);
+		btVector3 rotAxis = { vehicle->axis.x, vehicle->axis.y, vehicle->axis.z};
+		quat.setRotation(rotAxis, vehicle->target_angle);
 		rot.setRotation(rot.getRotation() * quat);
-
+		vehicle->current_angle = (vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle() * 180.f) / M_PI;
 		vehicle->vehicle->getRigidBody()->setWorldTransform(rot);
+		vehicle->vehicle->getRigidBody()->setAngularVelocity({0,0,0});
+		vehicle->rotating = false;
 	}
 	return UPDATE_CONTINUE;
 }
@@ -256,6 +251,13 @@ void ModulePlayer::RespawnCar()
 	vehicle->current_angle = 0;
 	App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
 	App->player->speed_bost = false;
+
+	p2List_item<PhysSensor3D*>* item = App->map->map_sensors.getFirst();
+	while (item)
+	{
+		item->data->isEnabled = true;
+		item = item->next;
+	}
 }
 
 void ModulePlayer::LastCheckPoint()
@@ -265,10 +267,10 @@ void ModulePlayer::LastCheckPoint()
 	vehicle->GetTransform(&carMatrix);
 
 	//Correct position and rotation
-	carMatrix.rotate(0, { 0, 1, 0 });
+	carMatrix.rotate(-90, { 0, 1, 0 });
 	//carMatrix.rotate(0, { 1, 0, 0 });
 	//carMatrix.rotate(0, { 0, 0, 1 });
-	carMatrix.translate( -44,60,75);
+	carMatrix.translate( -44,5,140);
 
 	//Set corrected transform
 	vehicle->SetTransform(&carMatrix.M[0]);
@@ -281,6 +283,13 @@ void ModulePlayer::LastCheckPoint()
 	vehicle->current_angle = 0;
 	App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
 	App->player->speed_bost = false;
+
+	p2List_item<PhysSensor3D*>* item = App->map->map_sensors.getFirst();
+	while (item)
+	{
+		item->data->isEnabled = true;
+		item = item->next;
+	}
 }
 
 

@@ -281,17 +281,17 @@ bool ModuleMap::Start()
 	//Last ramp
 	CreateRectangle({ -90,6,137 }, { -30,0,0,1 }, { 30,0.2f,14 }, Blue);
 	CreateSensor({ -50,1,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, SPEEDBOOST, { 0,10,0 });
-	CreateSensor({ -100,15,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, GRAVITYMOD, { 0,10,0 }, {180, 1, 0, 1});
+	CreateSensor({ -100,15,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, GRAVITYMOD, { 0,10,0 }, {180, 1, 0, -1});
 
 	//Ceil
 	CreateRectangle({ -130,45,137 }, { 0,0,0,1 }, { 20,0.2f,50 }, White);
-	CreateSensor({ -130,45,107 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,-10,0 });
+	CreateSensor({ -130,45,107 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,-10,0 }, {135, 0, 0, 1});
 	CreateRectangle({ -130,25,77 }, { 0,0,0,1 }, { 20,0.2f,30 }, White);
 
 	//Sky ramp
 	CreateRectangle({ -130,28,59 }, { -70,1,0,0 }, { 9,20,0.2f }, Blue);
 	CreateRectangle({ -130,31,42 }, { 0,0,0,1 }, { 9,0.2f,15 }, White);
-	CreateSensor({ -130,30,35 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,0,-10 });
+	CreateSensor({ -130,30,35 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,0,-10 }, { -90, 1, 0, 0 });
 
 	//Wall walk
 	

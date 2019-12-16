@@ -17,7 +17,7 @@
 
 ModulePhysics3D::ModulePhysics3D(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	debug = true;
+	debug = false;
 
 	collision_conf = new btDefaultCollisionConfiguration();
 	dispatcher = new btCollisionDispatcher(collision_conf);
@@ -99,39 +99,44 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					sensor = (PhysSensor3D*)pbodyB;
 				}
 
-				switch (sensor->type)
+				if (sensor->isEnabled) 
 				{
-				case GRAVITYMOD:
-					if (!App->player->vehicle->rotating)
+					switch (sensor->type)
 					{
-						//Code needsa to be generic and cleaned
-						SetGravity(sensor->gravityMod);
-						btVector3 forward = App->player->vehicle->vehicle->getForwardVector();
-						vec3 forwardToVec3 = { forward.getX(), 0, forward.getZ() };
-						App->camera->cameraOffset = { 0.f, (sensor->gravityMod.y * -1) + 6, 0.f };
-						//vec3 forwardToVec3 = { sensor->body->getWorldTransform().getBasis().getRow(2).getX(),  sensor->body->getWorldTransform().getBasis().getRow(2).getY(), sensor->body->getWorldTransform().getBasis().getRow(2).getZ() };
-						
-						float a = 0.f;
-						float angle = 0.f;
-						if (sensor->gravityMod.y > 0)
+					case GRAVITYMOD:
+						if (!App->player->vehicle->rotating)
 						{
-							a = (sensor->gravityMod.y * -1) + 6;
-						}
-						else
-						{
-							a = (sensor->gravityMod.y * -1) - 4;
-						}
-						angle = sensor->targetRot.x;
+							//Code needsa to be generic and cleaned
+							SetGravity(sensor->gravityMod);
+							btVector3 forward = App->player->vehicle->vehicle->getForwardVector();
+							vec3 forwardToVec3 = { forward.getX(), forward.getY(), forward.getZ() };
+							App->camera->cameraOffset = { 0.f, (sensor->gravityMod.y * -1) + 6, 0.f };
+							//vec3 forwardToVec3 = { sensor->body->getWorldTransform().getBasis().getRow(2).getX(),  sensor->body->getWorldTransform().getBasis().getRow(2).getY(), sensor->body->getWorldTransform().getBasis().getRow(2).getZ() };
 
-						App->player->vehicle->SmoothRotation(angle, forwardToVec3);
-						App->camera->cameraOffset = { 0.f, a, 0.f };
-						App->player->speed_bost = false;
+							float a = 0.f;
+							float angle = 0.f;
+							if (sensor->gravityMod.y > 0)
+							{
+								a = (sensor->gravityMod.y * -1) + 6;
+							}
+							else
+							{
+								a = (sensor->gravityMod.y * -1) - 4;
+							}
+							angle = sensor->targetRot.x;
+
+							App->player->vehicle->SmoothRotation(sensor->targetRot.x, { sensor->targetRot.y,sensor->targetRot.z, sensor->targetRot.w });
+							App->camera->cameraOffset = { 0.f, a, 0.f };
+							App->player->speed_bost = false;
+							//TEMPORAL
+							sensor->isEnabled = false;
+						}
+						break;
+					case SPEEDBOOST:
+						App->player->speed_bost = true;
+						break;
+
 					}
-					break;
-				case SPEEDBOOST:
-					App->player->speed_bost = true;
-					break;
-
 				}
 
 			}

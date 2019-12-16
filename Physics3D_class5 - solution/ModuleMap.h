@@ -25,6 +25,13 @@ public:
 	PhysBody3D* CreateRectangle(vec3, vec4, vec3, Color, float mass = 0.f);
 	void CreateCylinder(vec3, vec4, float, float, Color, float mass = 0.f);
 	void CreateSensor(vec3, vec4, vec3, Color, SensorType, vec3, vec4 target_rotation = { 0, 0, 0, 1 });
+
+	void FirstPhaseObjects();
+	void SecondPhaseObjects();
+	void ThirdPhaseObjects();
+	void LastPhaseObjects();
+	void CreateSensors();
+
 	
 
 

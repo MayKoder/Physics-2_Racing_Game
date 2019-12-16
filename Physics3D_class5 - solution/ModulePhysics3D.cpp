@@ -114,6 +114,8 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 							//vec3 forwardToVec3 = { sensor->body->getWorldTransform().getBasis().getRow(2).getX(),  sensor->body->getWorldTransform().getBasis().getRow(2).getY(), sensor->body->getWorldTransform().getBasis().getRow(2).getZ() };
 
 							float a = 0.f;
+							float b = 0.f;
+							float c = 0.f;
 							float angle = 0.f;
 							if (sensor->gravityMod.y > 0)
 							{
@@ -123,14 +125,20 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 							{
 								a = (sensor->gravityMod.y * -1) - 4;
 							}
-							else if (sensor->gravityMod.y == 0)
+							//else if (sensor->gravityMod.y == 0)
+							//{
+							//	a =  0;
+							//}
+							if (sensor->gravityMod.z < 0) 
 							{
-								a =  4;
+								a = -2;
+								c = 6;
 							}
+
 							angle = sensor->targetRot.x;
 
 							App->player->vehicle->SmoothRotation(sensor->targetRot.x, { sensor->targetRot.y,sensor->targetRot.z, sensor->targetRot.w });
-							App->camera->cameraOffset = { 0.f, a, 0.f };
+							App->camera->cameraOffset = { b, a, c };
 							App->player->speed_bost = false;
 							//TEMPORAL
 							sensor->isEnabled = false;
@@ -423,6 +431,10 @@ PhysVehicle3D* ModulePhysics3D::AddVehicle(const VehicleInfo& info)
 	vehicles.add(pvehicle);
 
 	return pvehicle;
+}
+
+btVector3 ModulePhysics3D::GetGravity() {
+	return world->getGravity();
 }
 
 //Get vehicle info -----------------------------------------

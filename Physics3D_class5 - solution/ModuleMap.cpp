@@ -302,7 +302,7 @@ bool ModuleMap::Start()
 	CreateSensor({ -122,65,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,10,0 });
 
 	//Ceil 2
-	CreateRectangle({ -122,74,33 }, { 0,1,0,0 }, { 9,0.2f,25 }, White);
+	CreateRectangle({ -122,74,28 }, { 0,1,0,0 }, { 9,0.2f,35 }, White);
 	CreateRectangle({ -122,73,51 }, { -80,1,0,0 }, { 9,20,0.2f }, Blue);
 	CreateRectangle({ -122,72,69 }, { 90,1,0,0 }, { 16,16,1 }, White);
 	CreateRectangle({ -104,68,69 }, { -20,0,0,1 }, { 30,0.2f,9 }, Blue);
@@ -341,14 +341,14 @@ bool ModuleMap::Start()
 	CreateRectangle({ -9,15,-112 }, { 90,1,0,0 }, { 1,4,25 }, Red);
 
 	CreateRectangle({ 6,15,-110 }, { 90,1,0,0 }, { 30,0.2f,25 }, White);
-	CreateRectangle({ 20,15,-110 }, { 90,1,0,0 }, { 18,0.2f,7 }, White);
-	CreateSensor({ 35,15,-110 }, { 90,0,0,1 }, { 5,0.1f,10 }, White, GRAVITYMOD, { -10,0,0 });
+	CreateRectangle({ 26.5f,15,-110 }, { 90,1,0,0 }, { 25,0.2f,8 }, White);
+	CreateSensor({ 44,15,-110 }, { 90,0,0,1 }, { 5,0.1f,10 }, White, GRAVITYMOD, { -20,0,0 });
 
-	CreateRectangle({ 29,15,-101 }, { 90,1,0,0 }, { 0.2f,18,7 }, White);
-	CreateRectangle({ 29,19,-101 }, { 90,1,0,0 }, { 3,18,1 }, Red);
-	CreateRectangle({ 29,11,-101 }, { 90,1,0,0 }, { 3,18,1 }, Red);
-	CreateRectangle({ 29,15,-85 }, { 90,1,0,0 }, { 0.2f,18,5 }, White);
-	CreateSensor({ 29,15,-80 }, { 90,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,-10,0 });
+	CreateRectangle({ 39,15,-101 }, { 90,1,0,0 }, { 0.2f,18,8 }, White);
+	CreateRectangle({ 39,19,-101 }, { 90,1,0,0 }, { 3,18,1 }, Red);
+	CreateRectangle({ 39,11,-101 }, { 90,1,0,0 }, { 3,18,1 }, Red);
+	CreateRectangle({ 39,15,-88 }, { 90,1,0,0 }, { 0.2f,11,5 }, White);
+	CreateSensor({ 39,15,-80 }, { 90,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,-10,0 }, { -90,0,0,1 });
 
 
 

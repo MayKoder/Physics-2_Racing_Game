@@ -195,11 +195,11 @@ update_status ModulePlayer::Update(float dt)
 	{
 		if (turn < TURN_DEGREES) 
 		{
-			if (App->camera->cameraOffset.y > 0) 
+			if (App->physics->GetGravity().getY() <= 0)
 			{
 				turn += TURN_DEGREES;
 			}
-			else
+			if(App->physics->GetGravity().getY() > 0)
 			{
 				turn -= TURN_DEGREES;
 			}
@@ -210,11 +210,11 @@ update_status ModulePlayer::Update(float dt)
 	{
 		if (turn > -TURN_DEGREES) 
 		{
-			if (App->camera->cameraOffset.y > 0)
+			if (App->physics->GetGravity().getY() <= 0)
 			{
 				turn -= TURN_DEGREES;
 			}
-			else
+			if(App->physics->GetGravity().getY() > 0)
 			{
 				turn += TURN_DEGREES;
 			}

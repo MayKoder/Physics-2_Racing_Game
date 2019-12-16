@@ -143,7 +143,7 @@ update_status ModulePlayer::PreUpdate(float dt)
 update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
-
+	LOG("CAMERA OFFSET: %f", App->camera->cameraOffset.y);
 	//Respawn car to last spawnPosition
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && !respawn)
 	{

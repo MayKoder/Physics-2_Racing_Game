@@ -119,9 +119,13 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 							{
 								a = (sensor->gravityMod.y * -1) + 6;
 							}
-							else
+							else if(sensor->gravityMod.y < 0)
 							{
 								a = (sensor->gravityMod.y * -1) - 4;
+							}
+							else if (sensor->gravityMod.y == 0)
+							{
+								a =  4;
 							}
 							angle = sensor->targetRot.x;
 

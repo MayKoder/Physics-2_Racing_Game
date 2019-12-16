@@ -30,7 +30,7 @@ public:
 	PhysBody3D* AddBody(const Sphere& sphere, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cube& cube, float mass = 1.0f);
 	PhysBody3D* AddBody(const Cylinder& cylinder, float mass = 1.0f);
-	PhysSensor3D* AddSensor(const Cube& cube, const vec3, const SensorType);
+	PhysSensor3D* AddSensor(const Cube& cube, const vec3, const SensorType, vec4);
 	PhysVehicle3D* AddVehicle(const VehicleInfo& info);
 	PhysVehicle3D* GetVehicle(int);
 

@@ -51,6 +51,7 @@ public:
 public:
 	SensorType type;
 	vec3 gravityMod;
+	vec4 targetRot;
 };
 
 #endif // __PhysBody3D_H__

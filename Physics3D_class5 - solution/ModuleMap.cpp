@@ -281,7 +281,7 @@ bool ModuleMap::Start()
 	//Last ramp
 	CreateRectangle({ -90,6,137 }, { -30,0,0,1 }, { 30,0.2f,14 }, Blue);
 	CreateSensor({ -50,1,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, SPEEDBOOST, { 0,10,0 });
-	CreateSensor({ -100,15,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, GRAVITYMOD, { 0,10,0 });
+	CreateSensor({ -100,15,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, GRAVITYMOD, { 0,10,0 }, {180, 1, 0, 1});
 
 	//Ceil
 	CreateRectangle({ -130,45,137 }, { 0,0,0,1 }, { 20,0.2f,50 }, White);
@@ -439,7 +439,7 @@ bool ModuleMap::Start()
 	CreateSensor({ 5,55,-143 }, { 90,0,0,1 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,0,-10 });*/
 
 	//Test
-	CreateSensor({ 0, 1, -10 }, { 0, 0, 0, 1 }, { 10, 2, 0.1f }, White, GRAVITYMOD, {0, 10, 0});
+	CreateSensor({ 0, 1, -10 }, { 0, 0, 0, 1 }, { 10, 2, 0.1f }, White, GRAVITYMOD, { 0, 10, 0 }, {180, 0, 0, 1});
 	CreateRectangle({ 23, 10, -10}, { 0, 0, 0, 1 }, {30, 1, 30}, White);
 
 	return ret;
@@ -508,7 +508,7 @@ void ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float
 	map_objects.add(object);
 }
 
-void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_color, SensorType s_type,vec3 mod)
+void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_color, SensorType s_type, vec3 mod, vec4 target_rotation)
 {
 
 	Cube* object = new Cube();
@@ -517,7 +517,7 @@ void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_co
 	object->size = size;
 	object->color = s_color;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
-	map_sensors.add(App->physics->AddSensor(*object, mod, s_type));
+	map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation));
 
 }
 

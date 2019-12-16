@@ -120,44 +120,25 @@ update_status ModulePlayer::PreUpdate(float dt)
 {
 	if (vehicle->rotating)
 	{
-		float increment;
-		//Code duplicated need cleaning
-		if (vehicle->target_angle > 0) 
+		float increment = 0.15f;
+
+		btTransform rot = vehicle->vehicle->getRigidBody()->getWorldTransform();
+		btQuaternion quat = rot.getRotation();
+		btVector3 axis = quat.getAxis();
+
+		if ((rot.getRotation().getAngle() + increment) * 180 / M_PI >= vehicle->target_angle) 
 		{
-			increment = 5.f;
-			if (vehicle->current_angle + increment <= vehicle->target_angle)
-			{
-				vehicle->current_angle += increment;
-			}
-			else
-			{
-				vehicle->current_angle = vehicle->target_angle;
-				vehicle->rotating = false;
-				vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
-			}
-		}
-		else if(vehicle->target_angle <= 0)
-		{
-			increment = -5.f;
-			if (vehicle->current_angle + increment >= vehicle->target_angle)
-			{
-				vehicle->current_angle += increment;
-			}
-			else
-			{
-				vehicle->current_angle = vehicle->target_angle;
-				vehicle->rotating = false;
-				vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
-			}
+			increment = (vehicle->target_angle * M_PI / 180) - rot.getRotation().getAngle();
+			vehicle->rotating = false;
+			vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });
 		}
 
-		mat4x4 carMatrix;
-		vehicle->GetTransform(&carMatrix);
-		//Correct position and rotation
-		
-		carMatrix.rotate(vehicle->current_angle, vehicle->axis);
-		//Set corrected transform
-		vehicle->SetTransform(&carMatrix);
+		btVector3 rotAxis = {vehicle->axis.x, vehicle->axis.y , vehicle->axis.z};
+
+		quat.setRotation(rotAxis, increment);
+		rot.setRotation(rot.getRotation() * quat);
+
+		vehicle->vehicle->getRigidBody()->setWorldTransform(rot);
 	}
 	return UPDATE_CONTINUE;
 }

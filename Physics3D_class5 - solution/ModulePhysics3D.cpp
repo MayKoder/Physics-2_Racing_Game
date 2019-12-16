@@ -116,14 +116,13 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						if (sensor->gravityMod.y > 0)
 						{
 							a = (sensor->gravityMod.y * -1) + 6;
-							angle = 180.f;
 						}
 						else
 						{
 							a = (sensor->gravityMod.y * -1) - 4;
-							angle = 0.f;
 						}
-						
+						angle = sensor->targetRot.x;
+
 						App->player->vehicle->SmoothRotation(angle, forwardToVec3);
 						App->camera->cameraOffset = { 0.f, a, 0.f };
 						App->player->speed_bost = false;
@@ -303,7 +302,7 @@ PhysBody3D* ModulePhysics3D::AddBody(const Cube& cube, float mass)
 
 	return pbody;
 }
-PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, const vec3 gravityMod, const SensorType s_type) 
+PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, const vec3 gravityMod, const SensorType s_type, vec4 tarRot) 
 {
 	btCollisionShape* colShape = new btBoxShape(btVector3(cube.size.x * 0.5f, cube.size.y * 0.5f, cube.size.z * 0.5f));
 	shapes.add(colShape);
@@ -320,6 +319,7 @@ PhysSensor3D* ModulePhysics3D::AddSensor(const Cube& cube, const vec3 gravityMod
 	btRigidBody* body = new btRigidBody(rbInfo);
 	PhysSensor3D* pbody = new PhysSensor3D(body, s_type);
 	pbody->gravityMod = gravityMod;
+	pbody->targetRot = tarRot;
 	pbody->SetAsSensor(true);
 
 	body->setUserPointer(pbody);

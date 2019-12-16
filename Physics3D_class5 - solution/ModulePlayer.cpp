@@ -18,7 +18,6 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-
 	respawn = false;
 
 	VehicleInfo car;
@@ -118,20 +117,32 @@ bool ModulePlayer::CleanUp()
 
 update_status ModulePlayer::PreUpdate(float dt)
 {
+
 	if (vehicle->rotating)
 	{
+		//TODO: Make rotations smooth
 		float increment = 0.15f;
 
-		btTransform rot = vehicle->vehicle->getRigidBody()->getWorldTransform();
-		btQuaternion quat = rot.getRotation();
-		btVector3 axis = quat.getAxis();
-
-
+		//Get vehicle transform and rotation quaternion
+		btTransform vehicleTransform = vehicle->vehicle->getRigidBody()->getWorldTransform();
+		btQuaternion vehicleQuaternion = vehicleTransform.getRotation();
+		
+		//Axis to rotate arround
 		btVector3 rotAxis = { vehicle->axis.x, vehicle->axis.y, vehicle->axis.z};
-		quat.setRotation(rotAxis, vehicle->target_angle);
-		rot.setRotation(rot.getRotation() * quat);
+
+		//Rotate the quaternion an angle arround an axis
+		vehicleQuaternion.setRotation(rotAxis, vehicle->target_angle);
+
+		//Apply the new rotation and mult with the current one
+		vehicleTransform.setRotation(vehicleTransform.getRotation() * vehicleQuaternion);
+
+		//Update vehicle current angle value
 		vehicle->current_angle = (vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle() * 180.f) / M_PI;
-		vehicle->vehicle->getRigidBody()->setWorldTransform(rot);
+
+		//Set new transform
+		vehicle->vehicle->getRigidBody()->setWorldTransform(vehicleTransform);
+
+		//Stop loop and remove angular velocity created by the rotation
 		vehicle->vehicle->getRigidBody()->setAngularVelocity({0,0,0});
 		vehicle->rotating = false;
 	}
@@ -142,26 +153,8 @@ update_status ModulePlayer::PreUpdate(float dt)
 // Update: draw background
 update_status ModulePlayer::Update(float dt)
 {
-	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_REPEAT)
-	{
-		App->camera->cameraOffset.z += 2;
-	}
-	if (App->input->GetKey(SDL_SCANCODE_F) == KEY_REPEAT)
-	{
-		App->camera->cameraOffset.z -= 2;
-	}
-	if (App->input->GetKey(SDL_SCANCODE_T) == KEY_REPEAT)
-	{
-		App->camera->cameraOffset.y += 2;
-	}
-	if (App->input->GetKey(SDL_SCANCODE_G) == KEY_REPEAT)
-	{
-		App->camera->cameraOffset.y -= 2;
-	}
-
-
 	turn = acceleration = brake = 0.0f;
-	//LOG("CAMERA OFFSET: %f", App->camera->cameraOffset.y);
+
 	//Respawn car to last spawnPosition
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && !respawn)
 	{
@@ -254,8 +247,6 @@ void ModulePlayer::RespawnCar()
 
 	//Correct position and rotation
 	carMatrix.rotate(0, { 0, 1, 0 });
-	//carMatrix.rotate(0, { 1, 0, 0 });
-	//carMatrix.rotate(0, { 0, 0, 1 });
 	carMatrix.translate(vehicle->info.spawnPoint.x, vehicle->info.spawnPoint.y, vehicle->info.spawnPoint.z);
 
 	//Set corrected transform
@@ -286,8 +277,6 @@ void ModulePlayer::LastCheckPoint()
 
 	//Correct position and rotation
 	carMatrix.rotate(-90, { 0, 1, 0 });
-	//carMatrix.rotate(0, { 1, 0, 0 });
-	//carMatrix.rotate(0, { 0, 0, 1 });
 	//-44,5,140
 	carMatrix.translate(-40, 47.6, 69.7 );
 

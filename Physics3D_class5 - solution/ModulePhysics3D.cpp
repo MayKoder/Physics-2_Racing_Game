@@ -107,38 +107,36 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						if (!App->player->vehicle->rotating)
 						{
 							//Code needsa to be generic and cleaned
-							SetGravity(sensor->gravityMod);
-							btVector3 forward = App->player->vehicle->vehicle->getForwardVector();
-							vec3 forwardToVec3 = { forward.getX(), forward.getY(), forward.getZ() };
-							App->camera->cameraOffset = { 0.f, (sensor->gravityMod.y * -1) + 6, 0.f };
-							//vec3 forwardToVec3 = { sensor->body->getWorldTransform().getBasis().getRow(2).getX(),  sensor->body->getWorldTransform().getBasis().getRow(2).getY(), sensor->body->getWorldTransform().getBasis().getRow(2).getZ() };
 
-							float a = 0.f;
-							float b = 0.f;
-							float c = 0.f;
+							//Set new gravity
+							SetGravity(sensor->gravityMod);
+
+
+							App->camera->cameraOffset = { 0.f, (sensor->gravityMod.y * -1) + 6, 0.f };
+
 							float angle = 0.f;
+							float offsetX = 0.f;
+							float offsetY = 0.f;
+							float offsetZ = 0.f;
+							
 							if (sensor->gravityMod.y > 0)
 							{
-								a = (sensor->gravityMod.y * -1) + 6;
+								offsetY = (sensor->gravityMod.y * -1) + 6;
 							}
 							else if(sensor->gravityMod.y < 0)
 							{
-								a = (sensor->gravityMod.y * -1) - 4;
+								offsetY = (sensor->gravityMod.y * -1) - 4;
 							}
-							//else if (sensor->gravityMod.y == 0)
-							//{
-							//	a =  0;
-							//}
 							if (sensor->gravityMod.z < 0) 
 							{
-								a = -2;
-								c = 6;
+								offsetY = -2;
+								offsetZ = 6;
 							}
 
 							angle = sensor->targetRot.x;
 
-							App->player->vehicle->SmoothRotation(sensor->targetRot.x, { sensor->targetRot.y,sensor->targetRot.z, sensor->targetRot.w });
-							App->camera->cameraOffset = { b, a, c };
+							App->player->vehicle->SmoothRotation(sensor->targetRot.x, vec3(sensor->targetRot.y,sensor->targetRot.z, sensor->targetRot.w));
+							App->camera->cameraOffset = vec3(offsetX, offsetY, offsetZ);
 							App->player->speed_bost = false;
 							//TEMPORAL
 							sensor->isEnabled = false;

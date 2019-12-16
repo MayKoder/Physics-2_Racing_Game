@@ -270,7 +270,8 @@ void ModulePlayer::LastCheckPoint()
 	carMatrix.rotate(-90, { 0, 1, 0 });
 	//carMatrix.rotate(0, { 1, 0, 0 });
 	//carMatrix.rotate(0, { 0, 0, 1 });
-	carMatrix.translate( -44,5,140);
+	//-44,5,140
+	carMatrix.translate(-40, 47.6, 69.7 );
 
 	//Set corrected transform
 	vehicle->SetTransform(&carMatrix.M[0]);

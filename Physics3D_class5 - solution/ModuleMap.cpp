@@ -319,7 +319,7 @@ bool ModuleMap::Start()
 	CreateRectangle({ -44, 16.f, -10 }, { 120, 1, 0, 0 }, { 12, 25, 0.2f }, Yellow);
 
 	//Ending wall walk
-	CreateSensor({ -44,50,-90 }, { 90,1,0,0 }, { 30,0.2f,30 }, White, GRAVITYMOD, { 0,0,-10 });
+	CreateSensor({ -44,50,-90 }, { 90,1,0,0 }, { 30,0.2f,30 }, White, GRAVITYMOD, { 0,0,-10 }, { -180,1,0,0 });
 
 	CreateRectangle({ -44,45.5f,-148 }, { 90,1,0,0 }, { 30,4,1 }, Red);
 	CreateRectangle({ -44,64.5f,-148 }, { 90,1,0,0 }, { 30,4,1 }, Red);
@@ -333,14 +333,14 @@ bool ModuleMap::Start()
 
 	CreateRectangle({ 6,40,-150 }, { 90,1,0,0 }, { 10,0.2f,25 }, White);
 
-	CreateSensor({ 6,33,-150 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,0,10 });
+	CreateSensor({ 6,25,-150 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,0,10 }, { -90,1,0,0 });
 
 	//Wall walk opposite
-	CreateRectangle({ 6,24.5f,-112 }, { 90,1,0,0 }, { 25,4,1 }, Red);
-	CreateRectangle({ 6,5.5f,-112 }, { 90,1,0,0 }, { 25,4,1 }, Red);
-	CreateRectangle({ -6,15,-112 }, { 90,1,0,0 }, { 1,4,20 }, Red);
+	CreateRectangle({ 6,27.5f,-112 }, { 90,1,0,0 }, { 30,4,1 }, Red);
+	CreateRectangle({ 6,2.5f,-112 }, { 90,1,0,0 }, { 30,4,1 }, Red);
+	CreateRectangle({ -9,15,-112 }, { 90,1,0,0 }, { 1,4,25 }, Red);
 
-	CreateRectangle({ 6,15,-110 }, { 90,1,0,0 }, { 25,0.2f,20 }, White);
+	CreateRectangle({ 6,15,-110 }, { 90,1,0,0 }, { 30,0.2f,25 }, White);
 	CreateRectangle({ 20,15,-110 }, { 90,1,0,0 }, { 18,0.2f,7 }, White);
 	CreateSensor({ 35,15,-110 }, { 90,0,0,1 }, { 5,0.1f,10 }, White, GRAVITYMOD, { -10,0,0 });
 

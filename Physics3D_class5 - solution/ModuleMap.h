@@ -10,6 +10,7 @@ struct PhysBody3D;
 struct PhysMotor3D;
 struct PhysSensor3D;
 enum SensorType;
+class btHingeConstraint;
 
 class ModuleMap : public Module
 {
@@ -34,6 +35,7 @@ public:
 
 	p2DynArray<Primitive*> obs_primitives;
 	p2DynArray<PhysBody3D*> obs_bodys;
+	btHingeConstraint* rotatingWheel;
 
 
 public:

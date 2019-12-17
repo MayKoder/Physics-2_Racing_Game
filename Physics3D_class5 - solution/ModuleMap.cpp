@@ -29,10 +29,19 @@ bool ModuleMap::Start()
 	CreateSensors();
 
 
-	obs_bodys.PushBack(CreateRectangle({ 30, 25, 55 }, { 0, 0, 0, 1 }, { 10, 1, 5 }, White, 1.f));
+	obs_bodys.PushBack(CreateRectangle({ 30, 25, 55 }, { 0, 0, 0, 1 }, { 10, 1, 5 }, White, 500.f));
 	obs_primitives.PushBack(map_objects.getLast()->data);
 	App->physics->AddConstraintHinge(*CreateCylinder({ 30, 25, 55 }, { 90, 0, 1, 0 }, 0.2f, 6, Red),
-		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true);
+		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true)->enableAngularMotor(true, 1000, 1000);
+
+	obs_bodys.PushBack(CreateRectangle({ 40, 25, 55 }, { 0, 0, 0, 1 }, { 3, 1, 5 }, White, 500.f));
+	obs_primitives.PushBack(map_objects.getLast()->data);
+	obs_bodys.PushBack(CreateRectangle({ 20, 25, 55 }, { 0, 0, 0, 1 }, { 3, 1, 5 }, White, 500.f));
+	obs_primitives.PushBack(map_objects.getLast()->data);
+
+
+	App->physics->AddConstraintHinge(*obs_bodys[0], *obs_bodys[1], { 5, 0, 0 }, { -7.5f, 0, 0 }, { 0, 1, 0 }, {0, 0, 0});
+	App->physics->AddConstraintHinge(*obs_bodys[0], *obs_bodys[2], { -5, 0, 0 }, {7.5f, 0, 0}, { 0, 1, 0 }, { 0, 0, 0 });
 
 	return ret;
 }
@@ -54,6 +63,8 @@ update_status ModuleMap::Update(float dt)
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
+
+	
 
 	for (int i = 0; i < obs_bodys.Count(); i++)
 	{

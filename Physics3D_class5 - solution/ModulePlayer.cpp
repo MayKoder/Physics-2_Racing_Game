@@ -28,18 +28,51 @@ bool ModulePlayer::Start()
 		wheels[i]->color = Green;
 		wheels[i]->radius = 0.3f;
 		wheels[i]->height = 0.3f;
-		pb_wheels[i] = App->physics->AddBody(*wheels[i]);
+
 	}
+
+	//set wheels pos
 	wheels[0]->SetPos(1, 1, -1.5f);
 	wheels[1]->SetPos(1, 1, 1.5f);
 	wheels[2]->SetPos(-1, 1, -1.5f);
 	wheels[3]->SetPos(-1, 1, 1.5f);
 
-	cabin[0] = new Cube();
-	cabin[0]->color = White;
+	//Add Rigidbodies
+	for (int i = 0; i < 4; i++)
+	{
+		pb_wheels[i] = App->physics->AddBody(*wheels[i]);
+	}
+
+	//Create cubes
+	for (int i = 0; i < 4; i++)
+	{
+		cabin[i] = new Cube();
+		cabin[i]->color = White;
+	}
+
+
 	cabin[0]->SetPos(0, 1 + wheels[0]->radius * 2, 0);
 	cabin[0]->size = { 2, 0.5f, 3.5f };
-	chassis[0] = App->physics->AddBody(*cabin[0]);
+
+	
+	cabin[1]->SetPos(0, 2.5f, -1.4f);
+	cabin[1]->size = { 2, 1.5f, 0.1f };
+	cabin[1]->SetRotation(30.f, { 1,0,0 });
+
+	cabin[2]->SetPos(0, 3.1f, -0.5);
+	cabin[2]->size = { 2, 0.1f, 1.f };
+
+	cabin[3]->SetPos(0, 2.5f, .8f);
+	cabin[3]->size = { 2, 2.2f, 0.1f };
+	cabin[3]->SetRotation(-55.f, { 1,0,0 });
+
+	//Add ribidbodies to cabin
+	for (int i = 0; i < 4; i++)
+	{
+		pb_cabin[i] = App->physics->AddBody(*cabin[i]);
+	}
+
+
 
 
 	//cabin[1] = new Cube();
@@ -303,13 +336,17 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->Render();
 	cabin[0]->Render();
-	//cabin[1]->Render();
+	cabin[1]->Render();
+	cabin[2]->Render();
+	cabin[3]->Render();
 
 	//Render car
 	for (int i = 0; i < 4; i++)
 	{
 		wheels[i]->Render();
 	}
+
+
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());

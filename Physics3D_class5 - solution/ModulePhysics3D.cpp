@@ -455,7 +455,7 @@ PhysVehicle3D* ModulePhysics3D::GetVehicle(int position)
 }
 
 // ---------------------------------------------------------
-btHingeConstraint* ModulePhysics3D::AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB)
+btTypedConstraint* ModulePhysics3D::AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB)
 {
 	btTypedConstraint* p2p = new btPoint2PointConstraint(
 		*(bodyA.body), 
@@ -465,6 +465,7 @@ btHingeConstraint* ModulePhysics3D::AddConstraintP2P(PhysBody3D& bodyA, PhysBody
 	world->addConstraint(p2p);
 	constraints.add(p2p);
 	p2p->setDbgDrawSize(2.0f);
+	return p2p;
 }
 
 btHingeConstraint* ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisA, const vec3& axisB, bool disable_collision)
@@ -483,7 +484,7 @@ btHingeConstraint* ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBo
 	return hinge;
 }
 
-btHingeConstraint* ModulePhysics3D::AddFixedConstrain(PhysBody3D& bodyA, PhysBody3D& bodyB, btVector3 offset)
+btFixedConstraint* ModulePhysics3D::AddFixedConstrain(PhysBody3D& bodyA, PhysBody3D& bodyB, btVector3 offset)
 {
 	btTransform transB = bodyA.body->getWorldTransform();
 
@@ -497,6 +498,7 @@ btHingeConstraint* ModulePhysics3D::AddFixedConstrain(PhysBody3D& bodyA, PhysBod
 	world->addConstraint(cons, true);
 	constraints.add(cons);
 	cons->setDbgDrawSize(2.0f);
+	return cons;
 }
 
 // =============================================

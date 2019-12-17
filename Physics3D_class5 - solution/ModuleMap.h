@@ -32,8 +32,8 @@ public:
 	void LastPhaseObjects();
 	void CreateSensors();
 
-
-	
+	p2DynArray<Primitive*> obs_primitives;
+	p2DynArray<PhysBody3D*> obs_bodys;
 
 
 public:

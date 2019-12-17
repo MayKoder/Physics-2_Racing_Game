@@ -28,6 +28,12 @@ bool ModuleMap::Start()
 	LastPhaseObjects();
 	CreateSensors();
 
+
+	obs_bodys.PushBack(CreateRectangle({ 30, 25, 55 }, { 0, 0, 0, 1 }, { 10, 1, 5 }, White, 1.f));
+	obs_primitives.PushBack(map_objects.getLast()->data);
+	App->physics->AddConstraintHinge(*CreateCylinder({ 30, 25, 55 }, { 90, 0, 1, 0 }, 0.2f, 6, Red),
+		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true);
+
 	return ret;
 }
 
@@ -37,6 +43,8 @@ bool ModuleMap::CleanUp()
 	LOG("Unloading Intro scene");
 	map_objects.clear();
 	map_sensors.clear();
+	obs_bodys.Clear();
+	obs_primitives.Clear();
 	return true;
 }
 
@@ -46,6 +54,12 @@ update_status ModuleMap::Update(float dt)
 	Plane p(0, 1, 0, 0);
 	p.axis = true;
 	p.Render();
+
+	for (int i = 0; i < obs_bodys.Count(); i++)
+	{
+		obs_bodys[i]->GetTransform(&obs_primitives[i]->transform);
+	}
+
 
 	p2List_item<Primitive*>* item = map_objects.getFirst();
 

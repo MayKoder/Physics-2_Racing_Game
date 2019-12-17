@@ -102,7 +102,7 @@ bool ModulePlayer::Start()
 	car.spawnPoint = {0, 2, 0};
 
 	vehicle = App->physics->AddVehicle(car);
-	vehicle->SetPos(car.spawnPoint.x, car.spawnPoint.y, car.spawnPoint.z);
+	vehicle->SetPos(car.spawnPoint.x, car.spawnPoint.y, car.spawnPoint.z -5);
 	App->camera->currVehicle = vehicle;
 	
 	return true;
@@ -330,15 +330,16 @@ void ModulePlayer::LastCheckPoint()
 	else
 	{
 		//Correct position and rotation
-		carMatrix.rotate(90, { 0, 1, 0 });
+		carMatrix.rotate(180, { 0, 1, 0 });
 		//-44,5,140
+		//30, 20, -20
 		carMatrix.translate(-40, 47.6, 69.7);
 	}
 
 	//Set corrected transform
 	vehicle->SetTransform(&carMatrix.M[0]);
 
-	App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
+	App->camera->cameraOffset = vec3(0.f, 6.f, 0.f);
 	//Correct velocity (set to 0)
 	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
 	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });

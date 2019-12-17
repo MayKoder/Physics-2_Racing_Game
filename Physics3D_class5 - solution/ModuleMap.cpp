@@ -508,14 +508,14 @@ void ModuleMap::LastPhaseObjects()
 	CreateRectangle({ 25, 10, 72.5f }, { 0, 0, 0, 1 }, { 5, 1, 5 }, White);
 	CreateRectangle({ 30, 10,78.5f }, { 0, 0, 0, 1 }, { 15, 1, 7 }, White);
 	CreateRectangle({ 30, 10, 91.5f }, { 0, 0, 0, 1 }, { 10, 1, 20 }, White);
-	CreateRectangle({ 30, 15, 110 }, { -30, 0.2f, 0, 0 }, { 10, 1, 20 }, Yellow);
+	CreateRectangle({ 30, 17.5f, 114.5f }, { -30, 1, 0, 0 }, { 10, 1, 30 }, Yellow);
 
 	//ENDING PLATFORM
-	CreateRectangle({ 30, 25, 155 }, { 0, 0, 0, 1 }, { 10, 1, 10 }, White);
-	CreateRectangle({ 30, 26, 160 }, { 0, 0, 0, 1 }, { 10, 2, 1 }, Red);
-	CreateRectangle({ 30, 26, 150 }, { 0, 0, 0, 1 }, { 10, 2, 1 }, Red);
-	CreateRectangle({ 35, 26, 155 }, { 0, 0, 0, 1 }, { 1, 2, 10 }, Red);
-	CreateRectangle({ 25, 26, 155 }, { 0, 0, 0, 1 }, { 1, 2, 10 }, Red);
+	CreateRectangle({ 30, 22.5f, 153.5f }, { -45, 1, 0, 0 }, { 10, 1, 10 }, White);
+	CreateRectangle({ 30, 29.5f, 153.5f }, { -45, 1, 0, 0 }, { 10, 10, 1 }, Red);
+	CreateRectangle({ 30, 22.5f, 146.5f }, { -45, 1, 0, 0 }, { 10, 10, 1 }, Red);
+	CreateRectangle({ 35, 26, 150 }, { -45, 1, 0, 0 }, { 1, 10, 10 }, Red);
+	CreateRectangle({ 25, 26, 150 }, { -45, 1, 0, 0 }, { 1, 10, 10 }, Red);
 
 	//NP CUP
 	CreateRectangle({ -17, 12.5f, 255 }, { 0, 0, 0, 1 }, { 130, 30, 2 }, Red);

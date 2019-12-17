@@ -478,6 +478,15 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 	hinge->setDbgDrawSize(2.0f);
 }
 
+void ModulePhysics3D::AddFixedConstrain(PhysBody3D& bodyA, PhysBody3D& bodyB)
+{
+	btFixedConstraint* cons = new btFixedConstraint(*(bodyA.body), *(bodyB.body), bodyA.body->getWorldTransform(), bodyB.body->getWorldTransform());
+
+	world->addConstraint(cons, true);
+	constraints.add(cons);
+	cons->setDbgDrawSize(2.0f);
+}
+
 // =============================================
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)
 {

@@ -586,6 +586,8 @@ void ModuleMap::CreateSensors()
 	//--------------CHECKPOINTS----------------
 	CreateSensor({ -130,32,85 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::CHECKPOINT, { 0,0,0 }, {180, 0, 1, 0});
 
+	//--------------ENDINGPOINTS---------------
+	CreateSensor({ 30, 28, 148 }, { -45,1,0,0 }, { 8, 1, 8 }, White, SensorType::FINISHLINE, { 0,0,0 });
 }
 
 

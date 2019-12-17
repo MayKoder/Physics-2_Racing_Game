@@ -103,7 +103,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				{
 					switch (sensor->type)
 					{
-					case GRAVITYMOD:
+					case SensorType::GRAVITYMOD:
 						if (!App->player->vehicle->rotating)
 						{
 							//Code needsa to be generic and cleaned
@@ -142,15 +142,19 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 							sensor->isEnabled = false;
 						}
 						break;
-					case SPEEDBOOST:
+					case SensorType::SPEEDBOOST:
 						App->player->speed_bost = true;
 						break;
 
-					case CHECKPOINT:
+					case SensorType::CHECKPOINT:
 						if (App->player->lastCheckPoint != sensor) 
 						{
 							App->player->lastCheckPoint = sensor;
 						}
+						break;
+
+					case SensorType::FINISHLINE:
+						App->player->FinishGame();
 						break;
 
 					}

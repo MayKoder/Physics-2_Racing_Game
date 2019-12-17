@@ -10,6 +10,9 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	turn = acceleration = brake = 0.0f;
 	speed_bost = false;
 	lastCheckPoint = nullptr;
+
+	game_finished = false;
+	restart_timer = 5.f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -259,6 +262,31 @@ update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
 
+
+	if (game_finished)
+	{
+		if (App->camera->followCar) App->camera->followCar = false;
+
+		restart_timer -= dt;
+		btVector3 cameraLerp = { App->camera->Position.x, App->camera->Position.y, App->camera->Position.z };
+
+		vec3 a = { App->player->vehicle->vehicle->getRigidBody()->getCenterOfMassPosition().getX(),
+			App->player->vehicle->vehicle->getRigidBody()->getCenterOfMassPosition().getY(),
+			App->player->vehicle->vehicle->getRigidBody()->getCenterOfMassPosition().getZ() };
+
+		cameraLerp = lerp(cameraLerp, { 100, 100, 0 }, 0.01f);
+		App->camera->LookAt(a);
+		App->camera->Position = { cameraLerp.getX(), cameraLerp.getY(), cameraLerp.getZ() };
+
+		if (restart_timer <= 0.f)
+		{
+			RespawnCar();
+			App->camera->followCar = true;
+			restart_timer = 5.f;
+			game_finished = false;
+		}
+	}
+
 	//Respawn car to last spawnPosition
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && !respawn)
 	{
@@ -355,6 +383,14 @@ update_status ModulePlayer::Update(float dt)
 	return UPDATE_CONTINUE;
 }
 
+void ModulePlayer::FinishGame()
+{
+	if (!game_finished)
+	{
+		game_finished = true;
+	}
+}
+
 void ModulePlayer::RespawnCar()
 {
 	App->physics->SetGravity({GRAVITY.getX(), GRAVITY.getY(), GRAVITY.getZ()});
@@ -404,10 +440,11 @@ void ModulePlayer::LastCheckPoint()
 	else
 	{
 		//Correct position and rotation
-		carMatrix.rotate(180, { 0, 1, 0 });
+		carMatrix.rotate(0, { 0, 1, 0 });
 		//-44,5,140
 		//30, 20, -20
-		carMatrix.translate(-40, 47.6, 69.7);
+		//-40, 47.6, 69.7
+		carMatrix.translate(30, 20, -20);
 	}
 
 	//Set corrected transform

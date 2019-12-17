@@ -23,6 +23,9 @@ public:
 
 	void RespawnCar();
 	void LastCheckPoint();
+	void FinishGame();
+
+
 
 public:
 
@@ -34,11 +37,15 @@ public:
 	bool respawn;
 	bool speed_bost;
 	bool super_boost;
+	bool game_finished;
 
 
 	Cylinder* wheels[4];
 	PhysBody3D* pb_wheels[4];
 	Cube* cabin[4];
 	PhysBody3D* pb_cabin[4];
+
+private:
+	float restart_timer;
 
 };

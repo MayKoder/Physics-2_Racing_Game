@@ -507,8 +507,8 @@ void ModuleMap::LastPhaseObjects()
 	CreateRectangle({ 27.5f, 10, 65 }, { 0, 0, 0, 1 }, { 10, 1, 10 }, White);
 	CreateRectangle({ 25, 10, 72.5f }, { 0, 0, 0, 1 }, { 5, 1, 5 }, White);
 	CreateRectangle({ 30, 10,78.5f }, { 0, 0, 0, 1 }, { 15, 1, 7 }, White);
-	CreateRectangle({ 30, 10, 91.5f }, { 0, 0, 0, 1 }, { 5, 1, 20 }, White);
-	CreateRectangle({ 30, 15, 110 }, { -30, 0.2f, 0, 0 }, { 5, 1, 20 }, Yellow);
+	CreateRectangle({ 30, 10, 91.5f }, { 0, 0, 0, 1 }, { 10, 1, 20 }, White);
+	CreateRectangle({ 30, 15, 110 }, { -30, 0.2f, 0, 0 }, { 10, 1, 20 }, Yellow);
 
 	//ENDING PLATFORM
 	CreateRectangle({ 30, 25, 155 }, { 0, 0, 0, 1 }, { 10, 1, 10 }, White);
@@ -518,31 +518,31 @@ void ModuleMap::LastPhaseObjects()
 	CreateRectangle({ 25, 26, 155 }, { 0, 0, 0, 1 }, { 1, 2, 10 }, Red);
 
 	//NP CUP
-	CreateRectangle({ -20, 26-20, 255 }, { 0, 0, 0, 1 }, { 140, 45, 2 }, Red);
+	CreateRectangle({ -17, 12.5f, 255 }, { 0, 0, 0, 1 }, { 130, 30, 2 }, Red);
 	//N
-	CreateRectangle({ 30, 26 - 15, 230 }, { 0, 0, 0, 1 }, { 5, 19, 2 }, Black);
-	CreateRectangle({ 25, 26 - 15, 230 }, { -30, 0, 0, 1 }, { 5, 19, 2 }, Black);
-	CreateRectangle({ 20, 26 - 15, 230 }, { 0, 0, 0, 1 }, { 5, 19, 2 }, Black);
+	CreateRectangle({ 30, 26 - 15, 250 }, { 0, 0, 0, 1 }, { 5, 19, 2 }, Black);
+	CreateRectangle({ 25, 26 - 15, 250 }, { -30, 0, 0, 1 }, { 5, 19, 2 }, Black);
+	CreateRectangle({ 20, 26 - 15, 250 }, { 0, 0, 0, 1 }, { 5, 19, 2 }, Black);
 
 	//P
-	CreateRectangle({ 10, 26 - 15, 230 }, { 0, 0, 0, 1 }, { 5, 19, 2 }, Black);
-	CreateRectangle({ 5, 32 - 15, 230 }, { -50, 0, 0, 1 }, { 4, 10, 2 }, Black);
-	CreateRectangle({ 5, 28 - 15, 230 }, { 60, 0, 0, 1 }, { 4, 10, 2 }, Black);
+	CreateRectangle({ 10, 26 - 15, 250 }, { 0, 0, 0, 1 }, { 5, 19, 2 }, Black);
+	CreateRectangle({ 5, 32 - 15, 250 }, { -50, 0, 0, 1 }, { 4, 10, 2 }, Black);
+	CreateRectangle({ 5, 28 - 15, 250 }, { 60, 0, 0, 1 }, { 4, 10, 2 }, Black);
 
 	//C
-	CreateRectangle({ -20, 32 - 15, 230 }, { 50, 0, 0, 1 }, { 4, 19, 2 }, Black);
-	CreateRectangle({-20, 22 - 15, 230 }, { -50, 0, 0, 1 }, { 4, 19, 2 }, Black);
+	CreateRectangle({ -20, 32 - 15, 250 }, { 50, 0, 0, 1 }, { 4, 19, 2 }, Black);
+	CreateRectangle({-20, 22 - 15, 250 }, { -50, 0, 0, 1 }, { 4, 19, 2 }, Black);
 
 	//U
-	CreateRectangle({ -36, 29 - 15, 230 }, { 0, 0, 0, 1 }, { 4, 19, 2 }, Black);
-	CreateRectangle({ -46, 29 - 15, 230 }, { 0, 0, 0, 1 }, { 4, 19, 2 }, Black);
-	CreateRectangle({ -39, 19 - 15, 230 }, { -50, 0, 0, 1 }, { 4, 10, 2 }, Black);
-	CreateRectangle({ -43, 19 - 15, 230 }, { 50, 0, 0, 1 }, { 4, 10, 2 }, Black);
+	CreateRectangle({ -36, 29 - 15, 250 }, { 0, 0, 0, 1 }, { 4, 19, 2 }, Black);
+	CreateRectangle({ -46, 29 - 15, 250 }, { 0, 0, 0, 1 }, { 4, 19, 2 }, Black);
+	CreateRectangle({ -39, 19 - 15, 250 }, { -50, 0, 0, 1 }, { 4, 10, 2 }, Black);
+	CreateRectangle({ -43, 19 - 15, 250 }, { 50, 0, 0, 1 }, { 4, 10, 2 }, Black);
 
 	//P
-	CreateRectangle({ -56, 26 - 15, 230 }, { 0, 0, 0, 1 }, { 5, 22, 2 }, Black);
-	CreateRectangle({ -61, 32 - 15, 230 }, { -50, 0, 0, 1 }, { 4, 13, 2 }, Black);
-	CreateRectangle({ -61, 26 - 15, 230 }, { 50, 0, 0, 1 }, { 4, 13, 2 }, Black);
+	CreateRectangle({ -56, 26 - 15, 250 }, { 0, 0, 0, 1 }, { 5, 22, 2 }, Black);
+	CreateRectangle({ -61, 32 - 15, 250 }, { -50, 0, 0, 1 }, { 4, 13, 2 }, Black);
+	CreateRectangle({ -61, 26 - 15, 250 }, { 50, 0, 0, 1 }, { 4, 13, 2 }, Black);
 }
 
 void ModuleMap::CreateSensors()
@@ -569,7 +569,7 @@ void ModuleMap::CreateSensors()
 	CreateSensor({ -122,62,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, SensorType::GRAVITYMOD, { 0,10,0 }, { -90, 1, 0, 0 });
 
 	//Second phase to cube
-	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 20,0.1f,20 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, {-90, 1, 0, 0});
+	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 25,0.1f,20 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, {-90, 1, 0, 0});
 
 	//Third phase wall walk
 	CreateSensor({ -44,50,-90 }, { 90,1,0,0 }, { 30,0.2f,30 }, White, SensorType::GRAVITYMOD, { 0,0,-10 }, { -180,1,0,0 });

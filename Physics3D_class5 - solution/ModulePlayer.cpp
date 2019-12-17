@@ -24,56 +24,53 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	respawn = false;
 
-	//CreateWheels
-	for (int i = 0; i < 4; i++)
-	{
-		wheels[i] = new Cylinder();
-		wheels[i]->color = Green;
-		wheels[i]->radius = 0.3f;
-		wheels[i]->height = 0.3f;
+	////CreateWheels
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	wheels[i] = new Cylinder();
+	//	wheels[i]->color = Green;
+	//	wheels[i]->radius = 0.3f;
+	//	wheels[i]->height = 0.3f;
 
-	}
+	//}
 
-	//set wheels pos
-	wheels[0]->SetPos(1, 1, -1.5f);
-	wheels[1]->SetPos(1, 1, 1.5f);
-	wheels[2]->SetPos(-1, 1, -1.5f);
-	wheels[3]->SetPos(-1, 1, 1.5f);
+	////set wheels pos
+	//wheels[0]->SetPos(1, 1, -1.5f);
+	//wheels[1]->SetPos(1, 1, 1.5f);
+	//wheels[2]->SetPos(-1, 1, -1.5f);
+	//wheels[3]->SetPos(-1, 1, 1.5f);
 
 	//Add Rigidbodies
-	for (int i = 0; i < 4; i++)
-	{
-		pb_wheels[i] = App->physics->AddBody(*wheels[i]);
-	}
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	pb_wheels[i] = App->physics->AddBody(*wheels[i]);
+	//}
 
 	//Create cubes
-	for (int i = 0; i < 4; i++)
-	{
-		cabin[i] = new Cube();
-		cabin[i]->color = White;
-	}
+	pb_cabin[0] = App->map->CreateRectangle({ 0,2,-1 }, { 0,0,0,1 }, { .75,0.3,1.2 },White,50.f);
 
-
-	cabin[0]->SetPos(0, 1 + wheels[0]->radius * 2, 0);
-	cabin[0]->size = { 2, 0.5f, 3.5f };
 
 	
-	cabin[1]->SetPos(0, 2.5f, -1.4f);
-	cabin[1]->size = { 2, 1.5f, 0.1f };
-	cabin[1]->SetRotation(30.f, { 1,0,0 });
 
-	cabin[2]->SetPos(0, 3.1f, -0.5);
-	cabin[2]->size = { 2, 0.1f, 1.f };
 
-	cabin[3]->SetPos(0, 2.5f, .8f);
-	cabin[3]->size = { 2, 2.2f, 0.1f };
-	cabin[3]->SetRotation(-55.f, { 1,0,0 });
+
+	//
+	//cabin[1]->SetPos(0, 2.5f, -1.4f);
+	//cabin[1]->size = { 2, 1.5f, 0.1f };
+	//cabin[1]->SetRotation(30.f, { 1,0,0 });
+
+	//cabin[2]->SetPos(0, 3.1f, -0.5);
+	//cabin[2]->size = { 2, 0.1f, 1.f };
+
+	//cabin[3]->SetPos(0, 2.5f, .8f);
+	//cabin[3]->size = { 2, 2.2f, 0.1f };
+	//cabin[3]->SetRotation(-55.f, { 1,0,0 });
 
 	//Add ribidbodies to cabin
-	for (int i = 0; i < 4; i++)
-	{
-		pb_cabin[i] = App->physics->AddBody(*cabin[i]);
-	}
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	pb_cabin[i] = App->physics->AddBody(*cabin[i]);
+	//}
 
 
 
@@ -89,8 +86,8 @@ bool ModulePlayer::Start()
 	VehicleInfo car;
 	
 	// Car properties ----------------------------------------
-	car.chassis_size.Set(2, 2, 4);
-	car.chassis_offset.Set(0, 1.5, 0);
+	car.chassis_size.Set(1.8, .8, 4);
+	car.chassis_offset.Set(0, 1.0, 0);
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.88f;
 	car.suspensionCompression = 0.83f;
@@ -101,8 +98,8 @@ bool ModulePlayer::Start()
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
-	float wheel_radius = 0.6f;
-	float wheel_width = 0.5f;
+	float wheel_radius = 0.4f;
+	float wheel_width = 0.3f;
 	float suspensionRestLength = 1.2f;
 
 	// Don't change anything below this line ------------------
@@ -363,16 +360,6 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Brake(brake);
 
 	vehicle->Render();
-	cabin[0]->Render();
-	cabin[1]->Render();
-	cabin[2]->Render();
-	cabin[3]->Render();
-
-	//Render car
-	for (int i = 0; i < 4; i++)
-	{
-		wheels[i]->Render();
-	}
 
 
 

@@ -41,3 +41,21 @@
 	{
 		wheels[i]->GetTransform(&wheels_prim[i]->transform);
 	}
+
+
+	void AddFixedConstrain(PhysBody3D& bodyA, PhysBody3D& bodyB, btVector3 offset);
+void ModulePhysics3D::AddFixedConstrain(PhysBody3D& bodyA, PhysBody3D& bodyB, btVector3 offset)
+{
+	btTransform transB = bodyA.body->getWorldTransform();
+
+	mat4x4 pos;
+	transB.getOpenGLMatrix(&pos);
+	pos.M[13] += offset.getY();
+	transB.setFromOpenGLMatrix(&pos);
+
+	btFixedConstraint* cons = new btFixedConstraint(*(bodyA.body), *(bodyB.body), transB, bodyA.body->getWorldTransform());
+
+	world->addConstraint(cons, true);
+	constraints.add(cons);
+	cons->setDbgDrawSize(2.0f);
+}

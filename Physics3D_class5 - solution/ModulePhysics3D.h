@@ -36,7 +36,7 @@ public:
 
 	void AddConstraintP2P(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB);
 	void AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, const vec3& anchorA, const vec3& anchorB, const vec3& axisS, const vec3& axisB, bool disable_collision = false);
-	void AddFixedConstrain(PhysBody3D& bodyA, PhysBody3D& bodyB);
+	void AddFixedConstrain(PhysBody3D& bodyA, PhysBody3D& bodyB, btVector3 offset);
 	void SetGravity(const vec3 v);
 	btVector3 GetGravity();
 

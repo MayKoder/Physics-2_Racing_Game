@@ -9,6 +9,7 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 {
 	turn = acceleration = brake = 0.0f;
 	speed_bost = false;
+	lastCheckPoint = nullptr;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -146,6 +147,47 @@ update_status ModulePlayer::PreUpdate(float dt)
 		vehicle->vehicle->getRigidBody()->setAngularVelocity({0,0,0});
 		vehicle->rotating = false;
 	}
+
+#pragma region SmoothRotationIB
+	//if (vehicle->rotating)
+	//{
+	//	//TODO: Make rotations smooth
+
+	//	//Get vehicle transform and rotation quaternion
+	//	btTransform vehicleTransform = vehicle->vehicle->getRigidBody()->getWorldTransform();
+	//	btQuaternion vehicleQuaternion = vehicleTransform.getRotation();
+
+	//	//Axis to rotate arround
+	//	btVector3 rotAxis = { vehicle->axis.x, vehicle->axis.y, vehicle->axis.z };
+
+
+	//	float increment = 0.05f;
+	//	vehicle->current_angle = LerpNum(vehicle->current_angle, (vehicle->target_angle * M_PI) / 180.f, increment);
+
+	//	//Rotate the quaternion an angle arround an axis
+	//	vehicleQuaternion.setRotation(rotAxis, vehicle->current_angle);
+
+	//	//Apply the new rotation and mult with the current one
+	//	//vehicleTransform.setRotation(vehicleTransform.getRotation() * vehicleQuaternion); //Use this for increment rotations
+	//	vehicleTransform.setRotation(vehicleQuaternion);
+
+
+	//	if (roundf(vehicle->current_angle * 180.f / M_PI) == vehicle->target_angle)
+	//	{
+	//		//Stop loop and remove angular velocity created by the rotation
+	//		//vehicle->current_angle = (vehicle->target_angle * M_PI) / 180.f;
+	//		vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0,0,0 });
+	//		vehicle->rotating = false;
+	//	}
+
+	//	//Update vehicle current angle value
+	//	//vehicle->current_angle = (vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle() * 180.f) / M_PI;
+
+	//	//Set new transform
+	//	vehicle->vehicle->getRigidBody()->setWorldTransform(vehicleTransform);
+	//}
+#pragma endregion
+
 	return UPDATE_CONTINUE;
 }
 
@@ -275,10 +317,22 @@ void ModulePlayer::LastCheckPoint()
 	mat4x4 carMatrix;
 	vehicle->GetTransform(&carMatrix);
 
-	//Correct position and rotation
-	carMatrix.rotate(-90, { 0, 1, 0 });
-	//-44,5,140
-	carMatrix.translate(-40, 47.6, 69.7 );
+	if (lastCheckPoint != nullptr) 
+	{
+		//Correct position and rotation
+		carMatrix.rotate(lastCheckPoint->targetRot.x, { lastCheckPoint->targetRot.y, lastCheckPoint->targetRot.z, lastCheckPoint->targetRot.w });
+		//-44,5,140
+		mat4x4 checkPointMat;
+		lastCheckPoint->GetTransform(&checkPointMat);
+		carMatrix.translate(checkPointMat[12], checkPointMat[13], checkPointMat[14]);
+	}
+	else
+	{
+		//Correct position and rotation
+		carMatrix.rotate(-90, { 0, 1, 0 });
+		//-44,5,140
+		carMatrix.translate(-40, 47.6, 69.7);
+	}
 
 	//Set corrected transform
 	vehicle->SetTransform(&carMatrix.M[0]);

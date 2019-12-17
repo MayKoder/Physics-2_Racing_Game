@@ -27,6 +27,7 @@ public:
 public:
 
 	PhysVehicle3D* vehicle;
+	PhysSensor3D* lastCheckPoint;
 	float turn;
 	float acceleration;
 	float brake;

@@ -542,7 +542,7 @@ void ModuleMap::CreateSensors()
 	CreateSensor({ -122,65,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,10,0 });
 
 	//Second phase to cube
-	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,-10,0 });
+	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,-10,0 }, {-90, 1, 0, 0});
 
 	//Third phase wall walk
 	CreateSensor({ -44,50,-90 }, { 90,1,0,0 }, { 30,0.2f,30 }, White, GRAVITYMOD, { 0,0,-10 }, { -180,1,0,0 });

@@ -134,7 +134,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 							}
 
 							angle = sensor->targetRot.x;
-
+							App->player->vehicle->current_angle = App->player->vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle();
 							App->player->vehicle->SmoothRotation(sensor->targetRot.x, vec3(sensor->targetRot.y,sensor->targetRot.z, sensor->targetRot.w));
 							App->camera->cameraOffset = vec3(offsetX, offsetY, offsetZ);
 							App->player->speed_bost = false;
@@ -144,6 +144,10 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						break;
 					case SPEEDBOOST:
 						App->player->speed_bost = true;
+						break;
+
+					case CHECKPOINT:
+						App->player->lastCheckPoint = sensor;
 						break;
 
 					}

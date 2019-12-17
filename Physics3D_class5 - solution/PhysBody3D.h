@@ -12,6 +12,7 @@ enum SensorType {
 	GRAVITYMOD,
 	FINISHLINE,
 	SPEEDBOOST,
+	SUPERSPEEDBOOST,
 };
 
 // =================================================

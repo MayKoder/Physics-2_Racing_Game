@@ -77,7 +77,7 @@ PhysBody3D* ModuleMap::CreateRectangle(vec3 position, vec4 rotation, vec3 size, 
 	return App->physics->AddBody(*object, mass);
 }
 
-void ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float height, Color s_color, float mass)
+PhysBody3D* ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float height, Color s_color, float mass)
 {
 	Cylinder* object = new Cylinder();
 
@@ -90,8 +90,8 @@ void ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius, float
 	object->height = height;
 	object->radius = radius;
 
-	App->physics->AddBody(*object, mass);
 	map_objects.add(object);
+	return App->physics->AddBody(*object, mass);
 }
 
 void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_color, SensorType s_type, vec3 mod, vec4 target_rotation)
@@ -371,13 +371,14 @@ void ModuleMap::FirstPhaseObjects()
 
 	//-------------TRANSITION TO SECOND PHASE--------------------
 	//Ceil
-	CreateRectangle({ -130,45,137 }, { 0,0,0,1 }, { 20,0.2f,50 }, White);
-	CreateRectangle({ -130,25,77 }, { 0,0,0,1 }, { 20,0.2f,30 }, White);
+	CreateRectangle({ -140,45,137 }, { 0,0,0,1 }, { 20,0.2f,50 }, White);
+	
 }
 
 void ModuleMap::SecondPhaseObjects()
 {
 	//Sky platform
+	CreateRectangle({ -130,25,77 }, { 0,0,0,1 }, { 20,0.2f,30 }, White);
 	CreateRectangle({ -130,28,59 }, { -70,1,0,0 }, { 9,20,0.2f }, Blue);
 	CreateRectangle({ -130,31,42 }, { 0,0,0,1 }, { 9,0.2f,15 }, White);
 
@@ -516,8 +517,32 @@ void ModuleMap::LastPhaseObjects()
 	CreateRectangle({ 35, 26, 155 }, { 0, 0, 0, 1 }, { 1, 2, 10 }, Red);
 	CreateRectangle({ 25, 26, 155 }, { 0, 0, 0, 1 }, { 1, 2, 10 }, Red);
 
-	//Test
-	CreateSensor({ 0, 1, -10 }, { 0, 0, 0, 1 }, { 10, 2, 0.1f }, White, GRAVITYMOD, { 0, 10, 0 }, { 180, 0, 0, 1 });
+	//NP CUP
+	CreateRectangle({ -20, 26-20, 255 }, { 0, 0, 0, 1 }, { 140, 45, 2 }, Red);
+	//N
+	CreateRectangle({ 30, 26 - 15, 230 }, { 0, 0, 0, 1 }, { 5, 19, 2 }, Black);
+	CreateRectangle({ 25, 26 - 15, 230 }, { -30, 0, 0, 1 }, { 5, 19, 2 }, Black);
+	CreateRectangle({ 20, 26 - 15, 230 }, { 0, 0, 0, 1 }, { 5, 19, 2 }, Black);
+
+	//P
+	CreateRectangle({ 10, 26 - 15, 230 }, { 0, 0, 0, 1 }, { 5, 19, 2 }, Black);
+	CreateRectangle({ 5, 32 - 15, 230 }, { -50, 0, 0, 1 }, { 4, 10, 2 }, Black);
+	CreateRectangle({ 5, 28 - 15, 230 }, { 60, 0, 0, 1 }, { 4, 10, 2 }, Black);
+
+	//C
+	CreateRectangle({ -20, 32 - 15, 230 }, { 50, 0, 0, 1 }, { 4, 19, 2 }, Black);
+	CreateRectangle({-20, 22 - 15, 230 }, { -50, 0, 0, 1 }, { 4, 19, 2 }, Black);
+
+	//U
+	CreateRectangle({ -36, 29 - 15, 230 }, { 0, 0, 0, 1 }, { 4, 19, 2 }, Black);
+	CreateRectangle({ -46, 29 - 15, 230 }, { 0, 0, 0, 1 }, { 4, 19, 2 }, Black);
+	CreateRectangle({ -39, 19 - 15, 230 }, { -50, 0, 0, 1 }, { 4, 10, 2 }, Black);
+	CreateRectangle({ -43, 19 - 15, 230 }, { 50, 0, 0, 1 }, { 4, 10, 2 }, Black);
+
+	//P
+	CreateRectangle({ -56, 26 - 15, 230 }, { 0, 0, 0, 1 }, { 5, 22, 2 }, Black);
+	CreateRectangle({ -61, 32 - 15, 230 }, { -50, 0, 0, 1 }, { 4, 13, 2 }, Black);
+	CreateRectangle({ -61, 26 - 15, 230 }, { 50, 0, 0, 1 }, { 4, 13, 2 }, Black);
 }
 
 void ModuleMap::CreateSensors()
@@ -527,6 +552,8 @@ void ModuleMap::CreateSensors()
 	CreateSensor({ -50,1,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, SensorType::SPEEDBOOST, { 0,10,0 });
 
 	CreateSensor({ -44,45,57 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::SPEEDBOOST, { 0,0,-10 });
+
+	CreateSensor({ 30, 15, 95 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::SUPERSPEEDBOOST, { 0,0,-10 });
 
 	//------------GRAVITY-------------
 	//First gravity change
@@ -539,7 +566,7 @@ void ModuleMap::CreateSensors()
 	CreateSensor({ -130,30,35 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::GRAVITYMOD, { 0,0,-10 }, { -90, 1, 0, 0 });
 
 	//Second phase ceil walk
-	CreateSensor({ -122,65,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, SensorType::GRAVITYMOD, { 0,10,0 });
+	CreateSensor({ -122,62,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, SensorType::GRAVITYMOD, { 0,10,0 }, { -90, 1, 0, 0 });
 
 	//Second phase to cube
 	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 20,0.1f,20 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, {-90, 1, 0, 0});
@@ -556,6 +583,7 @@ void ModuleMap::CreateSensors()
 	//Third phase to floor
 	CreateSensor({ 39,15,-80 }, { 90,1,0,0 }, { 10,0.1f,10 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, { 90,0,0,1 });
 
+	//--------------CHECKPOINTS----------------
 	CreateSensor({ -130,32,85 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::CHECKPOINT, { 0,0,0 }, {180, 0, 1, 0});
 
 }

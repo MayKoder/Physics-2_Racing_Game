@@ -33,4 +33,5 @@ public:
 	float brake;
 	bool respawn;
 	bool speed_bost;
+	bool super_boost;
 };

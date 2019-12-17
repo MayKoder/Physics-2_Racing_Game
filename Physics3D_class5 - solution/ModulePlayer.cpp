@@ -333,12 +333,12 @@ void ModulePlayer::LastCheckPoint()
 		carMatrix.rotate(90, { 0, 1, 0 });
 		//-44,5,140
 		carMatrix.translate(-40, 47.6, 69.7);
-		App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
 	}
 
 	//Set corrected transform
 	vehicle->SetTransform(&carMatrix.M[0]);
 
+	App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
 	//Correct velocity (set to 0)
 	vehicle->vehicle->getRigidBody()->setLinearVelocity({ 0, 0, 0 });
 	vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0, 0, 0 });

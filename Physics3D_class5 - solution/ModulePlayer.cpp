@@ -21,6 +21,35 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	respawn = false;
 
+	//CreateWheels
+	for (int i = 0; i < 4; i++)
+	{
+		wheels[i] = new Cylinder();
+		wheels[i]->color = Green;
+		wheels[i]->radius = 0.3f;
+		wheels[i]->height = 0.3f;
+		pb_wheels[i] = App->physics->AddBody(*wheels[i]);
+	}
+	wheels[0]->SetPos(1, 1, -1.5f);
+	wheels[1]->SetPos(1, 1, 1.5f);
+	wheels[2]->SetPos(-1, 1, -1.5f);
+	wheels[3]->SetPos(-1, 1, 1.5f);
+
+	cabin[0] = new Cube();
+	cabin[0]->color = White;
+	cabin[0]->SetPos(0, 1 + wheels[0]->radius * 2, 0);
+	cabin[0]->size = { 2, 0.5f, 3.5f };
+	chassis[0] = App->physics->AddBody(*cabin[0]);
+
+
+	//cabin[1] = new Cube();
+	//cabin[1]->color = White;
+	//cabin[1]->SetPos(0, 2, 3.5f);
+	//cabin[1]->size = { 1, 1, 1 };
+	//chassis[1] = App->physics->AddBody(*cabin[1]);
+	
+
+
 	VehicleInfo car;
 	
 	// Car properties ----------------------------------------
@@ -273,6 +302,14 @@ update_status ModulePlayer::Update(float dt)
 	vehicle->Brake(brake);
 
 	vehicle->Render();
+	cabin[0]->Render();
+	//cabin[1]->Render();
+
+	//Render car
+	for (int i = 0; i < 4; i++)
+	{
+		wheels[i]->Render();
+	}
 
 	char title[80];
 	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());

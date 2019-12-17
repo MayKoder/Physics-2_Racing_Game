@@ -34,4 +34,12 @@ public:
 	bool respawn;
 	bool speed_bost;
 	bool super_boost;
+
+
+	Cylinder* wheels[4];
+	PhysBody3D* pb_wheels[4];
+	PhysBody3D* chassis[2];
+	Cube* cabin[2];
+	PhysBody3D* front_left;
+	PhysBody3D* front_right;
 };

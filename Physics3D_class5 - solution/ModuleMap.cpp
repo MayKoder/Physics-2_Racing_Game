@@ -28,33 +28,6 @@ bool ModuleMap::Start()
 	LastPhaseObjects();
 	CreateSensors();
 
-	int i = 0;
-	car_body[i] = CreateRectangle({ 0, 5, 0 }, { 0, 0, 0, 1 }, { 2, 1, 3 }, White, 1.f);
-	car_body_prim[i] = map_objects.getLast()->data;
-	i++;
-	car_body[i] = CreateRectangle({ 0, 5.6f, .2f }, { 0, 0, 0, 1 }, { 1, 0.4f, 1.5f }, Black, 1.f);
-	car_body_prim[i] = map_objects.getLast()->data;
-
-	i = 0;
-	wheels[i] = CreateCylinder({ 0.8, 3.9f, 1 }, { 0, 0, 0, 1 }, 0.5f, 0.2f, Red, 1.f);
-	wheels_prim[i] = map_objects.getLast()->data;
-	i++;
-
-	wheels[i] = CreateCylinder({ -0.8, 3.9f, 1 }, { 0, 0, 0, 1 }, 0.5f, 0.2f, Red, 1.f);
-	wheels_prim[i] = map_objects.getLast()->data;
-	i++;
-
-	wheels[i] = CreateCylinder({ -0.8, 3.9f, -1 }, { 0, 0, 0, 1 }, 0.5f, 0.2f, Red, 1.f);
-	wheels_prim[i] = map_objects.getLast()->data;
-	i++;
-
-	wheels[i] = CreateCylinder({ 0.8, 3.9f, -1 }, { 0, 0, 0, 1 }, 0.5f, 0.2f, Red, 1.f);
-	wheels_prim[i] = map_objects.getLast()->data;
-	i++;
-
-	//App->physics->AddConstraintHinge(*car_body[0], *car_body[1], { 0, 1, 0 }, { 0, 0, 0 }, { 0, 0, 1 }, {0, 0, 0}, true);
-	App->physics->AddFixedConstrain(*car_body[0], *car_body[1], {0, 0.7f, 0});
-
 	return ret;
 }
 
@@ -74,16 +47,8 @@ update_status ModuleMap::Update(float dt)
 	p.axis = true;
 	p.Render();
 
-	for (int i = 0; i < 2; i++)
-	{
-		car_body[i]->GetTransform(&car_body_prim[i]->transform);
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		wheels[i]->GetTransform(&wheels_prim[i]->transform);
-	}
-
 	p2List_item<Primitive*>* item = map_objects.getFirst();
+
 	while (item)
 	{
 		item->data->Render();

@@ -478,16 +478,9 @@ void ModulePhysics3D::AddConstraintHinge(PhysBody3D& bodyA, PhysBody3D& bodyB, c
 	hinge->setDbgDrawSize(2.0f);
 }
 
-void ModulePhysics3D::AddFixedConstrain(PhysBody3D& bodyA, PhysBody3D& bodyB, btVector3 offset)
+void ModulePhysics3D::AddFixedConstrain(PhysBody3D& bodyA, PhysBody3D& bodyB)
 {
-	btTransform transB = bodyA.body->getWorldTransform();
-
-	mat4x4 pos;
-	transB.getOpenGLMatrix(&pos);
-	pos.M[13] += offset.getY();
-	transB.setFromOpenGLMatrix(&pos);
-
-	btFixedConstraint* cons = new btFixedConstraint(*(bodyA.body), *(bodyB.body), transB, bodyA.body->getWorldTransform());
+	btFixedConstraint* cons = new btFixedConstraint(*(bodyA.body), *(bodyB.body), bodyA.body->getWorldTransform(), bodyB.body->getWorldTransform());
 
 	world->addConstraint(cons, true);
 	constraints.add(cons);

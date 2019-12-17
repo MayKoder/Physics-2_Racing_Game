@@ -33,11 +33,8 @@ public:
 	void CreateSensors();
 
 
-	//This will be moved to vehicle
-	PhysBody3D* wheels[4];
-	PhysBody3D* car_body[2];
-	Primitive* wheels_prim[4];
-	Primitive* car_body_prim[2];
+	
+
 
 public:
 	/*

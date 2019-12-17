@@ -147,7 +147,10 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						break;
 
 					case CHECKPOINT:
-						App->player->lastCheckPoint = sensor;
+						if (App->player->lastCheckPoint != sensor) 
+						{
+							App->player->lastCheckPoint = sensor;
+						}
 						break;
 
 					}

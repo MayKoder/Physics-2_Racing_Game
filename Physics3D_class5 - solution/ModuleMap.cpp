@@ -524,39 +524,39 @@ void ModuleMap::CreateSensors()
 {
 	//-------------SPEED----------------
 
-	CreateSensor({ -50,1,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, SPEEDBOOST, { 0,10,0 });
+	CreateSensor({ -50,1,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, SensorType::SPEEDBOOST, { 0,10,0 });
 
-	CreateSensor({ -44,45,57 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SPEEDBOOST, { 0,0,-10 });
+	CreateSensor({ -44,45,57 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::SPEEDBOOST, { 0,0,-10 });
 
 	//------------GRAVITY-------------
 	//First gravity change
-	CreateSensor({ -105,18,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, GRAVITYMOD, { 0,10,0 }, { 180, 1, 0, -1 });
+	CreateSensor({ -105,18,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, SensorType::GRAVITYMOD, { 0,10,0 }, { 180, 1, 0, -1 });
 
 	//Second phase to floor
-	CreateSensor({ -130,45,107 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,-10,0 }, { 135, 0, 0, 1 });
+	CreateSensor({ -130,45,107 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, { 135, 0, 0, 1 });
 
 	//Second phase wall walk
-	CreateSensor({ -130,30,35 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, GRAVITYMOD, { 0,0,-10 }, { -90, 1, 0, 0 });
+	CreateSensor({ -130,30,35 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::GRAVITYMOD, { 0,0,-10 }, { -90, 1, 0, 0 });
 
 	//Second phase ceil walk
-	CreateSensor({ -122,65,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,10,0 });
+	CreateSensor({ -122,65,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, SensorType::GRAVITYMOD, { 0,10,0 });
 
 	//Second phase to cube
-	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 20,0.1f,20 }, White, GRAVITYMOD, { 0,-10,0 }, {-90, 1, 0, 0});
+	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 20,0.1f,20 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, {-90, 1, 0, 0});
 
 	//Third phase wall walk
-	CreateSensor({ -44,50,-90 }, { 90,1,0,0 }, { 30,0.2f,30 }, White, GRAVITYMOD, { 0,0,-10 }, { -180,1,0,0 });
+	CreateSensor({ -44,50,-90 }, { 90,1,0,0 }, { 30,0.2f,30 }, White, SensorType::GRAVITYMOD, { 0,0,-10 }, { -180,1,0,0 });
 
 	//Third phase wall walk 2
-	CreateSensor({ 6,25,-150 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,0,10 }, { -90,1,0,0 });
+	CreateSensor({ 6,25,-150 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, SensorType::GRAVITYMOD, { 0,0,10 }, { -90,1,0,0 });
 
 	//Third phase wall walk rotate
-	CreateSensor({ 44,15,-110 }, { 90,0,0,1 }, { 5,0.1f,10 }, White, GRAVITYMOD, { -20,0,0 });
+	CreateSensor({ 44,15,-110 }, { 90,0,0,1 }, { 5,0.1f,10 }, White, SensorType::GRAVITYMOD, { -20,0,0 });
 
 	//Third phase to floor
-	CreateSensor({ 39,15,-80 }, { 90,1,0,0 }, { 10,0.1f,10 }, White, GRAVITYMOD, { 0,-10,0 }, { 90,0,0,1 });
+	CreateSensor({ 39,15,-80 }, { 90,1,0,0 }, { 10,0.1f,10 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, { 90,0,0,1 });
 
-
+	CreateSensor({ -130,32,85 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::CHECKPOINT, { 0,0,0 }, {180, 0, 1, 0});
 
 }
 

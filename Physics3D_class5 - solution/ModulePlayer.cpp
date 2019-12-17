@@ -302,6 +302,7 @@ void ModulePlayer::RespawnCar()
 	vehicle->current_angle = 0;
 	App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
 	App->player->speed_bost = false;
+	lastCheckPoint = nullptr;
 
 	p2List_item<PhysSensor3D*>* item = App->map->map_sensors.getFirst();
 	while (item)
@@ -329,9 +330,10 @@ void ModulePlayer::LastCheckPoint()
 	else
 	{
 		//Correct position and rotation
-		carMatrix.rotate(-90, { 0, 1, 0 });
+		carMatrix.rotate(90, { 0, 1, 0 });
 		//-44,5,140
 		carMatrix.translate(-40, 47.6, 69.7);
+		App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
 	}
 
 	//Set corrected transform
@@ -343,7 +345,6 @@ void ModulePlayer::LastCheckPoint()
 
 	vehicle->rotating = false;
 	vehicle->current_angle = 0;
-	App->camera->cameraOffset = vec3(0.f, 4.f, 0.f);
 	App->player->speed_bost = false;
 
 	p2List_item<PhysSensor3D*>* item = App->map->map_sensors.getFirst();

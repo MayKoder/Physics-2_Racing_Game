@@ -419,7 +419,6 @@ void ModuleMap::SecondPhaseObjects()
 	//Sky platform
 	CreateRectangle({ -130,25,77 }, { 0,0,0,1 }, { 20,0.2f,30 }, White);
 	CreateRectangle({ -130,28,59 }, { -70,1,0,0 }, { 9,20,0.2f }, Blue);
-	CreateRectangle({ -130,31,42 }, { 0,0,0,1 }, { 9,0.2f,15 }, White);
 
 	//Wall walk
 
@@ -602,7 +601,7 @@ void ModuleMap::CreateSensors()
 	CreateSensor({ -130,45,107 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, { 135, 0, 0, 1 });
 
 	//Second phase wall walk
-	CreateSensor({ -130,30,35 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::GRAVITYMOD, { 0,0,-10 }, { -90, 1, 0, 0 });
+	CreateSensor({ -130,30,45 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::GRAVITYMOD, { 0,0,-10 }, { -90, 1, 0, 0 });
 
 	//Second phase ceil walk
 	CreateSensor({ -122,62,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, SensorType::GRAVITYMOD, { 0,10,0 }, { -90, 1, 0, 0 });
@@ -663,7 +662,7 @@ void ModuleMap::CreateSensors()
 
 	CreateSensor({ -200,80,0 }, { -90,0,0,1 }, { 185,0.1f,400 }, White, SensorType::RESPAWN, { 0,0,0 });
 
-	CreateSensor({ 0,120,0 }, { 90,0,1,0 }, { 400,0.1f,200 }, White, SensorType::RESPAWN, { 0,0,0 });
+	CreateSensor({ -10,120,0 }, { 90,0,1,0 }, { 400,0.1f,300 }, White, SensorType::RESPAWN, { 0,0,0 });
 
 }
 

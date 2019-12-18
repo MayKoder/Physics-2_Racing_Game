@@ -485,7 +485,7 @@ void ModuleMap::ThirdPhaseObjects()
 void ModuleMap::LastPhaseObjects()
 {
 	//Three platforms and ramps!
-	CreateRectangle({ 34,4,-65 }, { 0,1,0,0 }, { 15,0.2f,25 }, White);
+	CreateRectangle({ 34,4,-65 }, { 0,1,0,0 }, { 18,0.2f,25 }, White);
 	CreateRectangle({ 34, 7.5, -50 }, { 60, 1, 0, 0 }, { 6, 15, 0.2f }, Yellow);
 	CreateRectangle({ 34,11.2f,-37.5f }, { 0,1,0,0 }, { 12,0.2f,12 }, White);
 	CreateRectangle({ 24, 14.2f, -37.5f }, { -30,0,0,1 }, { 15, 0.2f, 6 }, Yellow);
@@ -592,6 +592,14 @@ void ModuleMap::LastPhaseObjects()
 	CreateRectangle({ -56, 26 - 15, 250 }, { 0, 0, 0, 1 }, { 5, 22, 2 }, Black);
 	CreateRectangle({ -61, 32 - 15, 250 }, { -50, 0, 0, 1 }, { 4, 13, 2 }, Black);
 	CreateRectangle({ -61, 26 - 15, 250 }, { 50, 0, 0, 1 }, { 4, 13, 2 }, Black);
+
+	//Checkpoint Sticks
+	CreateRectangle({ -130 + 8, 32 - 3, 85 }, { 0, 0, 0, 1 }, { 1, 8, 1}, White);
+	CreateRectangle({ -130-8, 32 - 3,85 }, { 0, 0, 0, 1 }, { 1, 8, 1 }, White);
+	CreateRectangle({ -44 + 8, 41 - 1.5f, 69.7f }, { 0, 0, 0, 1 }, { 1, 5, 1 }, White);
+	CreateRectangle({ -44-8,41 - 1.5f, 69.7f }, { 0, 0, 0, 1 }, { 1, 5, 1 }, White);
+	CreateRectangle({ 34 + 8, 5.5f, -65 }, { 0, 0, 0, 1 }, { 1, 3, 1 }, White);
+	CreateRectangle({ 34-8, 5.5f, -65 }, { 0, 0, 0, 1 }, { 1, 3, 1 }, White);
 }
 
 void ModuleMap::CreateSensors()

@@ -13,6 +13,7 @@ enum SensorType {
 	FINISHLINE,
 	SPEEDBOOST,
 	SUPERSPEEDBOOST,
+	RESPAWN,
 };
 
 // =================================================

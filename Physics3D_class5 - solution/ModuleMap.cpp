@@ -32,7 +32,7 @@ bool ModuleMap::Start()
 	obs_bodys.PushBack(CreateRectangle({ 30, 25, 55 }, { 0, 0, 0, 1 }, { 10, 1, 5 }, White, 500.f));
 	obs_primitives.PushBack(map_objects.getLast()->data);
 	App->physics->AddConstraintHinge(*CreateCylinder({ 30, 25, 55 }, { 90, 0, 1, 0 }, 0.2f, 6, Red),
-		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true)->enableAngularMotor(true, 1000, 1000);
+		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true)->enableAngularMotor(true, 500, 500);
 
 	obs_bodys.PushBack(CreateRectangle({ 40, 25, 55 }, { 0, 0, 0, 1 }, { 3, 1, 5 }, White, 500.f));
 	obs_primitives.PushBack(map_objects.getLast()->data);
@@ -137,6 +137,14 @@ void ModuleMap::FirstPhaseObjects()
 	//------------------------ROAD LIMITS---------------------------------------
 	//Left side ------------------------------------------------
 	CreateRectangle({ 7,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+	CreateRectangle({ 5,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+	CreateRectangle({ 3,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+	CreateRectangle({ 1,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+	CreateRectangle({ -1,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+	CreateRectangle({ -3,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+	CreateRectangle({ -5,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+	CreateRectangle({ -7,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+
 	CreateRectangle({ 7,1,3 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
 	CreateRectangle({ 7,1,6 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
 	CreateRectangle({ 7,1,9 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
@@ -146,9 +154,9 @@ void ModuleMap::FirstPhaseObjects()
 	CreateRectangle({ 6,1,21 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
 	CreateRectangle({ 5,1,24 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
 	CreateRectangle({ 4,1,27 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
-	CreateRectangle({ 3,1,30 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
-	CreateRectangle({ 3,1,33 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
-	CreateRectangle({ 3,1,36 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+	CreateRectangle({ 3,1,30 }, { 0,0,0,1 }, { 1,9.f,1 }, White);
+	CreateRectangle({ 3,1,33 }, { 0,0,0,1 }, { 1,9.f,1 }, Green);
+	CreateRectangle({ 3,1,36 }, { 0,0,0,1 }, { 1,9.f,1 }, White);
 	//Height 9
 	CreateRectangle({ 3,1,39 }, { 0,0,0,1 }, { 1,9.f,1 }, Green);
 	CreateRectangle({ 3,1,42 }, { 0,0,0,1 }, { 1,9.f,1 }, Yellow);
@@ -260,7 +268,7 @@ void ModuleMap::FirstPhaseObjects()
 	CreateRectangle({ -68,1,144 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
 	CreateRectangle({ -71,1,144 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
 	CreateRectangle({ -74,1,144 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
-	CreateRectangle({ -77,1,144 }, { 0,0,0,1 }, { 1,3.f,1 }, Red);
+
 
 	//Right side --------------------------------------------------------------
 	CreateRectangle({ -7,1,0 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
@@ -273,9 +281,9 @@ void ModuleMap::FirstPhaseObjects()
 	CreateRectangle({ -6,1,21 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
 	CreateRectangle({ -5,1,24 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
 	CreateRectangle({ -4,1,27 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
-	CreateRectangle({ -3,1,30 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
-	CreateRectangle({ -3,1,33 }, { 0,0,0,1 }, { 1,3.f,1 }, Green);
-	CreateRectangle({ -3,1,36 }, { 0,0,0,1 }, { 1,3.f,1 }, White);
+	CreateRectangle({ -3,1,30 }, { 0,0,0,1 }, { 1,9.f,1 }, White);
+	CreateRectangle({ -3,1,33 }, { 0,0,0,1 }, { 1,9.f,1 }, Green);
+	CreateRectangle({ -3,1,36 }, { 0,0,0,1 }, { 1,9.f,1 }, White);
 	//Height 9
 	CreateRectangle({ -3,1,39 }, { 0,0,0,1 }, { 1,9.f,1 }, Green);
 	CreateRectangle({ -3,1,42 }, { 0,0,0,1 }, { 1,9.f,1 }, Yellow);
@@ -617,6 +625,23 @@ void ModuleMap::CreateSensors()
 
 	//--------------ENDINGPOINTS---------------
 	CreateSensor({ 30, 28, 148 }, { -45,1,0,0 }, { 8, 1, 8 }, White, SensorType::FINISHLINE, { 0,0,0 });
+	
+
+	//--------------RESPAWN--------------------
+	CreateSensor({ -145,1,0 }, { 0,0,0,1 }, { 110,0.1f,410 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	CreateSensor({ -145,55,145 }, { 0,0,0,1 }, { 110,0.1f,120 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	CreateSensor({ -35,1,175 }, { 0,0,0,1 }, { 110,0.1f,50 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	CreateSensor({ -65,1,85 }, { 90,0,1,0 }, { 70,0.1f,50 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	CreateSensor({ -50,1,-40 }, { 90,0,1,0 }, { 185,0.1f,80 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	//
+	CreateSensor({ -50,80,-200 }, { 90,1,0,0 }, { 300,0.1f,185 }, White, SensorType::RESPAWN, { 0,0,0 });
+	CreateSensor({ 100,80,0 }, { -90,0,0,1 }, { 185,0.1f,400 }, White, SensorType::RESPAWN, { 0,0,0 });
+
 }
 
 

@@ -152,6 +152,17 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 							App->player->lastCheckPoint = sensor;
 						}
 						break;
+					case SensorType::RESPAWN:
+						if (App->player->lastCheckPoint != nullptr)
+						{
+							App->player->LastCheckPoint();
+						}
+						else
+						{
+							App->player->RespawnCar();
+						}
+						break;
+
 
 					case SensorType::FINISHLINE:
 						App->player->FinishGame();

@@ -105,7 +105,7 @@ bool ModulePlayer::Start()
 	car.wheels[3].brake = true;
 	car.wheels[3].steering = false;
 	
-	car.spawnPoint = {0, 2, 0};
+	car.spawnPoint = {0, 1, 10};
 
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(car.spawnPoint.x, car.spawnPoint.y, car.spawnPoint.z -5);
@@ -141,9 +141,9 @@ update_status ModulePlayer::PreUpdate(float dt)
 		//Get vehicle transform and rotation quaternion
 		btTransform vehicleTransform = vehicle->vehicle->getRigidBody()->getWorldTransform();
 		btQuaternion vehicleQuaternion = vehicleTransform.getRotation();
-		
+
 		//Axis to rotate arround
-		btVector3 rotAxis = { vehicle->axis.x, vehicle->axis.y, vehicle->axis.z};
+		btVector3 rotAxis = { vehicle->axis.x, vehicle->axis.y, vehicle->axis.z };
 
 		//Rotate the quaternion an angle arround an axis
 		vehicleQuaternion.setRotation(rotAxis, vehicle->target_angle);
@@ -151,55 +151,18 @@ update_status ModulePlayer::PreUpdate(float dt)
 		//Apply the new rotation and mult with the current one
 		vehicleTransform.setRotation(vehicleTransform.getRotation() * vehicleQuaternion);
 
-		//Update vehicle current angle value
-		vehicle->current_angle = (vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle() * 180.f) / M_PI;
-
 		//Set new transform
 		vehicle->vehicle->getRigidBody()->setWorldTransform(vehicleTransform);
 
 		//Stop loop and remove angular velocity created by the rotation
-		vehicle->vehicle->getRigidBody()->setAngularVelocity({0,0,0});
+		//Update vehicle current angle value
+		vehicle->current_angle = vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle() * RADTODEG;
+		vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0,0,0 });
 		vehicle->rotating = false;
 	}
 
 #pragma region SmoothRotationIB
-	//if (vehicle->rotating)
-	//{
-	//	//TODO: Make rotations smooth
 
-	//	//Get vehicle transform and rotation quaternion
-	//	btTransform vehicleTransform = vehicle->vehicle->getRigidBody()->getWorldTransform();
-	//	btQuaternion vehicleQuaternion = vehicleTransform.getRotation();
-
-	//	//Axis to rotate arround
-	//	btVector3 rotAxis = { vehicle->axis.x, vehicle->axis.y, vehicle->axis.z };
-
-
-	//	float increment = 0.05f;
-	//	vehicle->current_angle = LerpNum(vehicle->current_angle, (vehicle->target_angle * M_PI) / 180.f, increment);
-
-	//	//Rotate the quaternion an angle arround an axis
-	//	vehicleQuaternion.setRotation(rotAxis, vehicle->current_angle);
-
-	//	//Apply the new rotation and mult with the current one
-	//	//vehicleTransform.setRotation(vehicleTransform.getRotation() * vehicleQuaternion); //Use this for increment rotations
-	//	vehicleTransform.setRotation(vehicleQuaternion);
-
-
-	//	if (roundf(vehicle->current_angle * 180.f / M_PI) == vehicle->target_angle)
-	//	{
-	//		//Stop loop and remove angular velocity created by the rotation
-	//		//vehicle->current_angle = (vehicle->target_angle * M_PI) / 180.f;
-	//		vehicle->vehicle->getRigidBody()->setAngularVelocity({ 0,0,0 });
-	//		vehicle->rotating = false;
-	//	}
-
-	//	//Update vehicle current angle value
-	//	//vehicle->current_angle = (vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle() * 180.f) / M_PI;
-
-	//	//Set new transform
-	//	vehicle->vehicle->getRigidBody()->setWorldTransform(vehicleTransform);
-	//}
 #pragma endregion
 
 	return UPDATE_CONTINUE;

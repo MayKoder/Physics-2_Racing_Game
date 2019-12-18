@@ -438,10 +438,10 @@ void ModuleMap::ThirdPhaseObjects()
 	CreateRectangle({ -44,45.5f,-148 }, { 90,1,0,0 }, { 30,4,1 }, Red);
 	CreateRectangle({ -44,64.5f,-148 }, { 90,1,0,0 }, { 30,4,1 }, Red);
 	CreateRectangle({ -59,55,-148 }, { 90,1,0,0 }, { 1,4,20 }, Red);
-	CreateRectangle({ -44,55,-150 }, { 90,1,0,0 }, { 30,0.2f,20 }, White);
-	CreateRectangle({ -24,55,-150 }, { 90,1,0,0 }, { 30,0.2f,12 }, White);
-	CreateRectangle({ -4,55,-150 }, { 90,1,0,0 }, { 30,0.2f,7 }, White);
-	CreateRectangle({ 6,40,-150 }, { 90,1,0,0 }, { 10,0.2f,25 }, White);
+	CreateRectangle({ -44,55,-150 }, { 90,1,0,0 }, { 30,1.f,20 }, White);
+	CreateRectangle({ -24,55,-150 }, { 90,1,0,0 }, { 30,1.2f,12 }, White);
+	CreateRectangle({ -4,55,-150 }, { 90,1,0,0 }, { 30,1.f,7 }, White);
+	CreateRectangle({ 6,40,-150 }, { 90,1,0,0 }, { 10,1.f,25 }, White);
 
 	//Second Wall walk
 	CreateRectangle({ 6,27.5f,-112 }, { 90,1,0,0 }, { 30,4,1 }, Red);

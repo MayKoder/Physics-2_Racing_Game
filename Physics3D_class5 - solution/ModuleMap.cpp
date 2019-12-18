@@ -638,9 +638,25 @@ void ModuleMap::CreateSensors()
 
 	CreateSensor({ -50,1,-40 }, { 90,0,1,0 }, { 185,0.1f,80 }, White, SensorType::RESPAWN, { 0,0,0 });
 
-	//
+	CreateSensor({ 40,1,-50 }, { 90,0,1,0 }, { 100,0.1f,115 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	CreateSensor({ 55,1,100 }, { 90,0,1,0 }, { 230,0.1f,90 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	CreateSensor({ -44, 20.6, 69.7 }, { 0,1,0,0 }, { 70,0.1f,70 }, White, SensorType::RESPAWN, { 0,0,0 }, { 180, 0, 1, 0 });
+
+	CreateSensor({ 0, 1, 41 }, { 0,1,0,0 }, { 6,0.1f,8 }, White, SensorType::RESPAWN, { 0,0,0 }, { 180, 0, 1, 0 });
+
+
+	//CUBE LIMITS
 	CreateSensor({ -50,80,-200 }, { 90,1,0,0 }, { 300,0.1f,185 }, White, SensorType::RESPAWN, { 0,0,0 });
+
 	CreateSensor({ 100,80,0 }, { -90,0,0,1 }, { 185,0.1f,400 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	CreateSensor({ -50,80,200 }, { 90,1,0,0 }, { 300,0.1f,185 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	CreateSensor({ -200,80,0 }, { -90,0,0,1 }, { 185,0.1f,400 }, White, SensorType::RESPAWN, { 0,0,0 });
+
+	CreateSensor({ 0,120,0 }, { 90,0,1,0 }, { 400,0.1f,200 }, White, SensorType::RESPAWN, { 0,0,0 });
 
 }
 

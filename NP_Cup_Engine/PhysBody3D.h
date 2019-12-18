@@ -3,6 +3,7 @@
 
 #include "p2List.h"
 #include "glmath.h"
+#include "Primitive.h"
 
 class btRigidBody;
 class Module;
@@ -55,6 +56,8 @@ public:
 	vec3 gravityMod;
 	vec4 targetRot;
 	bool isEnabled;
+
+	Primitive* lights[2];
 };
 
 #endif // __PhysBody3D_H__

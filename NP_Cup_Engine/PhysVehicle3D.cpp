@@ -41,21 +41,19 @@ void PhysVehicle3D::Render()
 	}
 
 
-	CreateCarPart({ info.chassis_size.x, info.chassis_size.y, info.chassis_size.z }, { info.chassis_offset.x, info.chassis_offset.y, info.chassis_offset.z }, Red).Render();
-
-	CreateCarPart({ 1.8f,0.6,1.5f }, { 0, 1.25f,2.1f }, Red).Render();
-	CreateCarPart({ 0.5, 0.8,0.8 }, { 0, 2, 1.2 }, Grey).Render();
-	CreateCarPart({ 0.25f, 0.4f, 0.4f }, { 0.5f, 1.4f, 2.4f }, Grey).Render();
-	CreateCarPart({ 0.25f, 0.4f, 0.4f }, { -0.5f, 1.4f, 2.4f }, Grey).Render();
-	CreateCarPart({ 1.4, 1,1.5 }, { 0, 2, -0.2 }, White).Render();
-	CreateCarPart({ 0.1, 0.3,.3 }, { .6, 2.2, -1.5 }, Yellow).Render();
-
-	CreateCarPart({ 0.1, 0.3,.3 }, { -.6, 2.2, -1.5 }, Yellow).Render();
-	CreateCarPart({ 2, 0.07,.5 }, { 0, 2.35, -1.5 }, Yellow).Render();
+	CreateCarPart(vec3( info.chassis_size.x, info.chassis_size.y, info.chassis_size.z ), { info.chassis_offset.x, info.chassis_offset.y, info.chassis_offset.z }, Red).Render();
+	CreateCarPart(vec3( 1.8f,0.6,1.5f ), { 0, 1.25f,2.1f }, Red).Render();
+	CreateCarPart(vec3( 0.5, 0.8,0.8 ), { 0, 2, 1.2 }, Grey).Render();
+	CreateCarPart(vec3( 0.25f, 0.4f, 0.4f ), { 0.5f, 1.4f, 2.4f }, Grey).Render();
+	CreateCarPart(vec3( 0.25f, 0.4f, 0.4f ), { -0.5f, 1.4f, 2.4f }, Grey).Render();
+	CreateCarPart(vec3( 1.4, 1,1.5 ), { 0, 2, -0.2 }, White).Render();
+	CreateCarPart(vec3( 0.1, 0.3,.3 ), { .6, 2.2, -1.5 }, Yellow).Render();
+	CreateCarPart(vec3( 0.1, 0.3,.3 ), { -.6, 2.2, -1.5 }, Yellow).Render();
+	CreateCarPart(vec3( 2, 0.07,.5 ), { 0, 2.35, -1.5 }, Yellow).Render();
 
 }
 
-Cube PhysVehicle3D::CreateCarPart(vec3 size, vec3 position, Color color)
+Cube PhysVehicle3D::CreateCarPart(const vec3 size, const vec3 position, const Color color)
 {
 	Cube part(size.x, size.y, size.z);
 

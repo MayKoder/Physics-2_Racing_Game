@@ -59,7 +59,7 @@ public:
 
 	VehicleInfo info;
 	btRaycastVehicle* vehicle;
-	Cube CreateCarPart(vec3, vec3, Color);
+	Cube CreateCarPart(const vec3, const vec3, const Color);
 
 public:
 	bool rotating;

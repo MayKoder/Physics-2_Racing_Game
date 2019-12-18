@@ -54,10 +54,35 @@ PhysSensor3D::PhysSensor3D(btRigidBody* body, SensorType s_type) : PhysBody3D(bo
 	is_sensor = false;
 	type = s_type;
 	isEnabled = true;
+
+	if (type == SensorType::CHECKPOINT) 
+	{
+
+		mat4x4 mat;
+		body->getWorldTransform().getOpenGLMatrix(&mat);
+
+		lights[0] = new Cube(3, 3, 3);
+		lights[0]->color = Grey;
+		lights[0]->SetPos(mat[12] + 8, mat[13] + 1.5f, mat[14]);
+
+		lights[1] = new Cube(3, 3, 3);
+		lights[1]->color = Grey;
+		lights[1]->SetPos(mat[12] - 8, mat[13] + 1.5f, mat[14]);
+	}
+	else
+	{
+		lights[0] = nullptr;
+		lights[1] = nullptr;
+	}
+
 }
 PhysSensor3D::~PhysSensor3D()
 {
-
+	if (type == SensorType::CHECKPOINT) 
+	{
+		delete lights[0];
+		delete lights[1];
+	}
 }
 
 void PhysSensor3D::SetAsSensor(bool is_sensor)

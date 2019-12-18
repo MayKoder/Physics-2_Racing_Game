@@ -6,6 +6,7 @@
 
 ModuleMap::ModuleMap(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	checkpointCounter = 0;
 }
 
 ModuleMap::~ModuleMap()
@@ -33,21 +34,7 @@ bool ModuleMap::Start()
 	ThirdPhaseObjects();
 	LastPhaseObjects();
 	CreateSensors();
-
-
-	obs_bodys.PushBack(CreateRectangle({ 30, 25, 55 }, { 0, 0, 0, 1 }, { 10, 1, 5 }, White, 500.f));
-	obs_primitives.PushBack(map_objects.getLast()->data);
-	App->physics->AddConstraintHinge(*CreateCylinder({ 30, 25, 55 }, { 90, 0, 1, 0 }, 0.2f, 6, Red),
-		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true)->enableAngularMotor(true, 350, 350);
-
-	obs_bodys.PushBack(CreateRectangle({ 40, 25, 55 }, { 0, 0, 0, 1 }, { 3, 1, 5 }, Blue, 500.f));
-	obs_primitives.PushBack(map_objects.getLast()->data);
-	obs_bodys.PushBack(CreateRectangle({ 20, 25, 55 }, { 0, 0, 0, 1 }, { 3, 1, 5 }, Blue, 500.f));
-	obs_primitives.PushBack(map_objects.getLast()->data);
-
-
-	App->physics->AddConstraintHinge(*obs_bodys[0], *obs_bodys[1], { 5, 0, 0 }, { -7.5f, 0, 0 }, { 0, 1, 0 }, {0, 0, 0});
-	App->physics->AddConstraintHinge(*obs_bodys[0], *obs_bodys[2], { -5, 0, 0 }, {7.5f, 0, 0}, { 0, 1, 0 }, { 0, 0, 0 });
+	CreateConstrains();
 
 	return ret;
 }
@@ -78,8 +65,22 @@ update_status ModuleMap::Update(float dt)
 	}
 
 
-	p2List_item<Primitive*>* item = map_objects.getFirst();
+	for (int i = 0; i < checkpointCounter; i++)
+	{
+		Color col = Grey;
+		if (App->player->lastCheckPoint == checkPoints[i])
+		{
+			col = Green;
+		}
 
+		checkPoints[i]->lights[0]->color = col;
+		checkPoints[i]->lights[1]->color = col;
+
+		checkPoints[i]->lights[0]->Render();
+		checkPoints[i]->lights[1]->Render();
+	}
+
+	p2List_item<Primitive*>* item = map_objects.getFirst();
 	while (item)
 	{
 		item->data->Render();
@@ -134,7 +135,17 @@ void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_co
 	object->size = size;
 	object->color = s_color;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
-	map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation));
+
+	if (s_type == SensorType::CHECKPOINT) 
+	{
+		checkPoints[checkpointCounter] = map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation))->data;
+		checkpointCounter++;
+	}
+	else
+	{
+		map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation));
+	}
+
 
 }
 
@@ -666,4 +677,19 @@ void ModuleMap::CreateSensors()
 
 }
 
+void ModuleMap::CreateConstrains()
+{
+	obs_bodys.PushBack(CreateRectangle({ 30, 25, 55 }, { 0, 0, 0, 1 }, { 10, 1, 5 }, White, 500.f));
+	obs_primitives.PushBack(map_objects.getLast()->data);
+	App->physics->AddConstraintHinge(*CreateCylinder({ 30, 25, 55 }, { 90, 0, 1, 0 }, 0.2f, 6, Red),
+		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true)->enableAngularMotor(true, 350, 350);
 
+	obs_bodys.PushBack(CreateRectangle({ 40, 25, 55 }, { 0, 0, 0, 1 }, { 3, 1, 5 }, Blue, 500.f));
+	obs_primitives.PushBack(map_objects.getLast()->data);
+	obs_bodys.PushBack(CreateRectangle({ 20, 25, 55 }, { 0, 0, 0, 1 }, { 3, 1, 5 }, Blue, 500.f));
+	obs_primitives.PushBack(map_objects.getLast()->data);
+
+
+	App->physics->AddConstraintHinge(*obs_bodys[0], *obs_bodys[1], { 5, 0, 0 }, { -7.5f, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 });
+	App->physics->AddConstraintHinge(*obs_bodys[0], *obs_bodys[2], { -5, 0, 0 }, { 7.5f, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 });
+}

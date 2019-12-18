@@ -5,6 +5,7 @@
 #include "Primitive.h"
 
 #define MAX_SNAKE 2
+#define MAX_CHECKPOINTS 3
 
 struct PhysBody3D;
 struct PhysMotor3D;
@@ -32,11 +33,13 @@ public:
 	void ThirdPhaseObjects();
 	void LastPhaseObjects();
 	void CreateSensors();
+	void CreateConstrains();
 
 	p2DynArray<Primitive*> obs_primitives;
 	p2DynArray<PhysBody3D*> obs_bodys;
 	btHingeConstraint* rotatingWheel;
 
+	int checkpointCounter;
 
 public:
 	/*
@@ -53,18 +56,7 @@ public:
 	int deathSound;
 	int sensorSound;
 
-	PhysBody3D* pb_chassis;
-	Cube p_chassis;
-
-	PhysBody3D* pb_wheel;
-	Cylinder p_wheel;
-
-	PhysBody3D* pb_wheel2;
-	Cylinder p_wheel2;
-
-	PhysMotor3D* left_wheel;
-	PhysMotor3D* right_wheel;
-
 	p2List<Primitive*> map_objects;
 	p2List<PhysSensor3D*> map_sensors;
+	PhysSensor3D* checkPoints[3];
 };

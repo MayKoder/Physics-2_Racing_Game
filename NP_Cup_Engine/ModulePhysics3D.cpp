@@ -120,6 +120,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						if (App->player->lastCheckPoint != sensor) 
 						{
 							App->player->lastCheckPoint = sensor;
+							App->audio->PlayFx(App->map->yaaySound);
 						}
 						break;
 

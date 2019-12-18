@@ -51,6 +51,7 @@ public:
 	int boostSound;
 	int yaaySound;
 	int deathSound;
+	int sensorSound;
 
 	PhysBody3D* pb_chassis;
 	Cube p_chassis;

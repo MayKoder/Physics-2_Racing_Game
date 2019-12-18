@@ -205,6 +205,8 @@ void ModulePhysics3D::ChangeGravityBySensor(PhysSensor3D* sensor)
 	
 	//TEMPORAL
 	sensor->isEnabled = false;
+	App->audio->PlayFx(App->map->sensorSound);
+
 }
 
 void ModulePhysics3D::SetGravity(const vec3 v) 

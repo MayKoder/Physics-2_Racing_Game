@@ -21,6 +21,7 @@ bool ModuleMap::Start()
 	boostSound = App->audio->LoadFx("sfx/BoostSoundEffect.wav");
 	yaaySound = App->audio->LoadFx("sfx/YaaySoundEffect.wav");
 	deathSound = App->audio->LoadFx("sfx/DeathSoundEffect.wav");
+	sensorSound = App->audio->LoadFx("sfx/GravitySensorEffect.wav");
 	App->audio->PlayMusic("music/DejaVu.ogg");
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));

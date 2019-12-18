@@ -17,9 +17,12 @@ bool ModuleMap::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
+	WinSound = App->audio->LoadFx("sfx/WinSoundEffect.wav");
+	BoostSound = App->audio->LoadFx("sfx/BoostSoundEffect.wav");
+	App->audio->PlayMusic("music/DejaVu.ogg");
+
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
 	App->camera->LookAt(vec3(0, 0, 0));
-	App->audio->PlayMusic("music/DejaVu.ogg");
 
 	//Create map
 	FirstPhaseObjects();
@@ -32,7 +35,7 @@ bool ModuleMap::Start()
 	obs_bodys.PushBack(CreateRectangle({ 30, 25, 55 }, { 0, 0, 0, 1 }, { 10, 1, 5 }, White, 500.f));
 	obs_primitives.PushBack(map_objects.getLast()->data);
 	App->physics->AddConstraintHinge(*CreateCylinder({ 30, 25, 55 }, { 90, 0, 1, 0 }, 0.2f, 6, Red),
-		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true)->enableAngularMotor(true, 500, 500);
+		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true)->enableAngularMotor(true, 450, 450);
 
 	obs_bodys.PushBack(CreateRectangle({ 40, 25, 55 }, { 0, 0, 0, 1 }, { 3, 1, 5 }, White, 500.f));
 	obs_primitives.PushBack(map_objects.getLast()->data);

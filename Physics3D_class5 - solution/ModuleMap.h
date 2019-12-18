@@ -49,6 +49,8 @@ public:
 
 	int winSound;
 	int boostSound;
+	int yaaySound;
+	int deathSound;
 
 	PhysBody3D* pb_chassis;
 	Cube p_chassis;

@@ -19,6 +19,8 @@ bool ModuleMap::Start()
 
 	winSound = App->audio->LoadFx("sfx/WinSoundEffect.wav");
 	boostSound = App->audio->LoadFx("sfx/BoostSoundEffect.wav");
+	yaaySound = App->audio->LoadFx("sfx/YaaySoundEffect.wav");
+	deathSound = App->audio->LoadFx("sfx/DeathSoundEffect.wav");
 	App->audio->PlayMusic("music/DejaVu.ogg");
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
@@ -605,7 +607,8 @@ void ModuleMap::CreateSensors()
 	CreateSensor({ -122,62,22 }, { 0,1,0,0 }, { 10,0.1f,10 }, White, SensorType::GRAVITYMOD, { 0,10,0 }, { -90, 1, 0, 0 });
 
 	//Second phase to cube
-	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 25,0.1f,20 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, {-90, 1, 0, 0});
+	CreateSensor({ -84,67,69 }, { 0,1,0,0 }, { 25,0.1f,20 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, { -90, 0, 1, 0 });
+	CreateSensor({ -55,60,69 }, { 90,0,0,1 }, { 15,0.1f,15 }, White, SensorType::GRAVITYMOD, { 0,-10,0 }, { -90, 0, 0, 1 });
 
 	//Third phase wall walk
 	CreateSensor({ -44,50,-90 }, { 90,1,0,0 }, { 30,0.2f,30 }, White, SensorType::GRAVITYMOD, { 0,0,-10 }, { -180,1,0,0 });

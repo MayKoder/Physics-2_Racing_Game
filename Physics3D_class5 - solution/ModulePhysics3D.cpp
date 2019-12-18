@@ -99,49 +99,18 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 					sensor = (PhysSensor3D*)pbodyB;
 				}
 
-				if (sensor->isEnabled) 
+				if (sensor && sensor->isEnabled) 
 				{
 					switch (sensor->type)
 					{
+
 					case SensorType::GRAVITYMOD:
 						if (!App->player->vehicle->rotating)
 						{
-							//Code needsa to be generic and cleaned
-
-							//Set new gravity
-							SetGravity(sensor->gravityMod);
-
-
-							App->camera->cameraOffset = { 0.f, (sensor->gravityMod.y * -1) + 6, 0.f };
-
-							float angle = 0.f;
-							float offsetX = 0.f;
-							float offsetY = 0.f;
-							float offsetZ = 0.f;
-							
-							if (sensor->gravityMod.y > 0)
-							{
-								offsetY = (sensor->gravityMod.y * -1) + 6;
-							}
-							else if(sensor->gravityMod.y < 0)
-							{
-								offsetY = (sensor->gravityMod.y * -1) - 4;
-							}
-							if (sensor->gravityMod.z < 0) 
-							{
-								offsetY = -2;
-								offsetZ = 6;
-							}
-
-							angle = sensor->targetRot.x;
-							App->player->vehicle->current_angle = App->player->vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle();
-							App->player->vehicle->SmoothRotation(sensor->targetRot.x, vec3(sensor->targetRot.y,sensor->targetRot.z, sensor->targetRot.w));
-							App->camera->cameraOffset = vec3(offsetX, offsetY, offsetZ);
-							App->player->speed_bost = false;
-							//TEMPORAL
-							sensor->isEnabled = false;
+							ChangeGravityBySensor(sensor);
 						}
 						break;
+
 					case SensorType::SPEEDBOOST:
 						App->player->speed_bost = true;
 						App->audio->PlayFx(App->map->boostSound);
@@ -153,6 +122,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 							App->player->lastCheckPoint = sensor;
 						}
 						break;
+
 					case SensorType::RESPAWN:
 						if (App->player->lastCheckPoint != nullptr)
 						{
@@ -162,8 +132,8 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						{
 							App->player->RespawnCar();
 						}
+						App->audio->PlayFx(App->map->deathSound);
 						break;
-
 
 					case SensorType::FINISHLINE:
 						App->player->FinishGame();
@@ -173,27 +143,68 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 				}
 
 			}
-
-			if(pbodyA && pbodyB)
+			else 
 			{
-				p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
-				while (item)
+				if (pbodyA && pbodyB)
 				{
-					item->data->OnCollision(pbodyA, pbodyB);
-					item = item->next;
-				}
+					p2List_item<Module*>* item = pbodyA->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyA, pbodyB);
+						item = item->next;
+					}
 
-				item = pbodyB->collision_listeners.getFirst();
-				while (item)
-				{
-					item->data->OnCollision(pbodyB, pbodyA);
-					item = item->next;
+					item = pbodyB->collision_listeners.getFirst();
+					while (item)
+					{
+						item->data->OnCollision(pbodyB, pbodyA);
+						item = item->next;
+					}
 				}
 			}
+
 		}
 	}
 
 	return UPDATE_CONTINUE;
+}
+
+void ModulePhysics3D::ChangeGravityBySensor(PhysSensor3D* sensor) 
+{
+
+	//Set new gravity
+	SetGravity(sensor->gravityMod);
+
+
+	App->camera->cameraOffset = { 0.f, (sensor->gravityMod.y * -1) + 6, 0.f };
+
+	float angle = 0.f;
+	float offsetX = 0.f;
+	float offsetY = 0.f;
+	float offsetZ = 0.f;
+
+	if (sensor->gravityMod.y > 0)
+	{
+		offsetY = (sensor->gravityMod.y * -1) + 6;
+	}
+	else if (sensor->gravityMod.y < 0)
+	{
+		offsetY = (sensor->gravityMod.y * -1) - 4;
+	}
+	if (sensor->gravityMod.z < 0)
+	{
+		offsetY = -2;
+		offsetZ = 6;
+	}
+
+	angle = sensor->targetRot.x;
+	App->player->vehicle->current_angle = App->player->vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle();
+	App->player->vehicle->SmoothRotation(sensor->targetRot.x, vec3(sensor->targetRot.y, sensor->targetRot.z, sensor->targetRot.w));
+	App->camera->cameraOffset = vec3(offsetX, offsetY, offsetZ);
+	App->player->speed_bost = false;
+	
+	//TEMPORAL
+	sensor->isEnabled = false;
 }
 
 void ModulePhysics3D::SetGravity(const vec3 v) 

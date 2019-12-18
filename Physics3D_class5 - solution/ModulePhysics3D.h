@@ -40,6 +40,7 @@ public:
 	btFixedConstraint* AddFixedConstrain(btRigidBody& bodyA, PhysBody3D& bodyB, btVector3 offset);
 	void SetGravity(const vec3 v);
 	btVector3 GetGravity();
+	void ChangeGravityBySensor(PhysSensor3D* sensor);
 
 private:
 

@@ -45,14 +45,26 @@ void PhysVehicle3D::Render()
 	btQuaternion q = vehicle->getChassisWorldTransform().getRotation();
 	btVector3 offset(info.chassis_offset.x, info.chassis_offset.y, info.chassis_offset.z);
 	offset = offset.rotate(q.getAxis(), q.getAngle());
-
 	chassis.transform.M[12] += offset.getX();
 	chassis.transform.M[13] += offset.getY();
 	chassis.transform.M[14] += offset.getZ();
 
+	Cube a(1, 1,1);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&a.transform);
+	q = vehicle->getChassisWorldTransform().getRotation();
+	btVector3 b_offset = {0, 2, 0 };
+	b_offset = b_offset.rotate(q.getAxis(), q.getAngle());
+	a.transform.M[12] += b_offset.getX();
+	a.transform.M[13] += b_offset.getY();
+	a.transform.M[14] += b_offset.getZ();
+	a.color = Black;
 
+
+	a.Render();
 	chassis.Render();
 }
+
+//Cube PhysVehicle3D::CreateCarPart(){
 
 // ----------------------------------------------------------------------------
 void PhysVehicle3D::ApplyEngineForce(float force)

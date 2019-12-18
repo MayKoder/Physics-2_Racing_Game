@@ -2,9 +2,11 @@
 
 #include "PhysBody3D.h"
 #include "glmath.h"
+#include "Color.h"
 
 class btRaycastVehicle;
 struct PhysBody3D;
+class Cube;
 
 struct Wheel
 {
@@ -52,10 +54,12 @@ public:
 	void Turn(float degrees);
 	void SmoothRotation(float, vec3);
 	float GetKmh() const;
+
 public:
 
 	VehicleInfo info;
 	btRaycastVehicle* vehicle;
+	//Cube CreateCarPart(VehicleInfo, vec3, vec3, Color);
 
 public:
 	bool rotating;

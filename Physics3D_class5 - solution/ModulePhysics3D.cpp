@@ -144,6 +144,7 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 						break;
 					case SensorType::SPEEDBOOST:
 						App->player->speed_bost = true;
+						App->audio->PlayFx(App->map->boostSound);
 						break;
 
 					case SensorType::CHECKPOINT:

@@ -193,6 +193,7 @@ update_status ModulePlayer::Update(float dt)
 		if (restart_timer <= 0.f)
 		{
 			RespawnCar();
+			App->audio->PlayMusic("music/DejaVu.ogg");
 			App->camera->followCar = true;
 			restart_timer = 5.f;
 			game_finished = false;
@@ -289,6 +290,8 @@ void ModulePlayer::FinishGame()
 {
 	if (!game_finished)
 	{
+		App->audio->StopMusic(0.f);
+		App->audio->PlayFx(App->map->winSound);
 		game_finished = true;
 	}
 }

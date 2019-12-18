@@ -134,6 +134,7 @@ void ModuleAudio::StopMusic(float fade_time)
 
 		// this call blocks until fade out is done
 		Mix_FreeMusic(music);
+		music = NULL;
 	}
 }
 

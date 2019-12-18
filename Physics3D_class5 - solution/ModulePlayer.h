@@ -43,7 +43,7 @@ public:
 	Cylinder* wheels[4];
 	PhysBody3D* pb_wheels[4];
 	Cube* cabin[4];
-	PhysBody3D* pb_cabin[4];
+	PhysBody3D* pb_cabin;
 
 private:
 	float restart_timer;

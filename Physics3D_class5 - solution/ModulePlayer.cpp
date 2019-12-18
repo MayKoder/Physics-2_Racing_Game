@@ -24,70 +24,14 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	respawn = false;
 
-	////CreateWheels
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	wheels[i] = new Cylinder();
-	//	wheels[i]->color = Green;
-	//	wheels[i]->radius = 0.3f;
-	//	wheels[i]->height = 0.3f;
 
-	//}
-
-	////set wheels pos
-	//wheels[0]->SetPos(1, 1, -1.5f);
-	//wheels[1]->SetPos(1, 1, 1.5f);
-	//wheels[2]->SetPos(-1, 1, -1.5f);
-	//wheels[3]->SetPos(-1, 1, 1.5f);
-
-	//Add Rigidbodies
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	pb_wheels[i] = App->physics->AddBody(*wheels[i]);
-	//}
-
-	//Create cubes
-	pb_cabin[0] = App->map->CreateRectangle({ 0,2,-1 }, { 0,0,0,1 }, { .75,0.3,1.2 },White,50.f);
-
-
-	
-
-
-
-	//
-	//cabin[1]->SetPos(0, 2.5f, -1.4f);
-	//cabin[1]->size = { 2, 1.5f, 0.1f };
-	//cabin[1]->SetRotation(30.f, { 1,0,0 });
-
-	//cabin[2]->SetPos(0, 3.1f, -0.5);
-	//cabin[2]->size = { 2, 0.1f, 1.f };
-
-	//cabin[3]->SetPos(0, 2.5f, .8f);
-	//cabin[3]->size = { 2, 2.2f, 0.1f };
-	//cabin[3]->SetRotation(-55.f, { 1,0,0 });
-
-	//Add ribidbodies to cabin
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	pb_cabin[i] = App->physics->AddBody(*cabin[i]);
-	//}
-
-
-
-
-	//cabin[1] = new Cube();
-	//cabin[1]->color = White;
-	//cabin[1]->SetPos(0, 2, 3.5f);
-	//cabin[1]->size = { 1, 1, 1 };
-	//chassis[1] = App->physics->AddBody(*cabin[1]);
-	
 
 
 	VehicleInfo car;
 	
 	// Car properties ----------------------------------------
-	car.chassis_size.Set(1.8, .8, 4);
-	car.chassis_offset.Set(0, 1.0, 0);
+	car.chassis_size.Set(1.8, 2, 4);
+	car.chassis_offset.Set(0, 1.5, 0);
 	car.mass = 500.0f;
 	car.suspensionStiffness = 15.88f;
 	car.suspensionCompression = 0.83f;
@@ -98,8 +42,8 @@ bool ModulePlayer::Start()
 
 	// Wheel properties ---------------------------------------
 	float connection_height = 1.2f;
-	float wheel_radius = 0.4f;
-	float wheel_width = 0.3f;
+	float wheel_radius = 0.6f;
+	float wheel_width = 0.5f;
 	float suspensionRestLength = 1.2f;
 
 	// Don't change anything below this line ------------------
@@ -166,6 +110,14 @@ bool ModulePlayer::Start()
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(car.spawnPoint.x, car.spawnPoint.y, car.spawnPoint.z -5);
 	App->camera->currVehicle = vehicle;
+
+
+	//Create cubes
+	//pb_cabin = App->map->CreateRectangle({ 0, 3, -6 }, { 0, 0, 0, 1 }, { 1, 1, 2 }, White, 1);
+	//App->map->obs_bodys.PushBack(pb_cabin);
+	//App->map->obs_primitives.PushBack(App->map->map_objects.getLast()->data);
+
+	//App->physics->AddFixedConstrain(*App->player->vehicle->vehicle->getRigidBody(),*pb_cabin, { 0,3,0 });
 	
 	return true;
 }

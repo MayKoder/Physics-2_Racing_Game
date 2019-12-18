@@ -500,6 +500,22 @@ btFixedConstraint* ModulePhysics3D::AddFixedConstrain(PhysBody3D& bodyA, PhysBod
 	cons->setDbgDrawSize(2.0f);
 	return cons;
 }
+btFixedConstraint* ModulePhysics3D::AddFixedConstrain(btRigidBody& bodyA, PhysBody3D& bodyB, btVector3 offset)
+{
+	btTransform transB = bodyA.getWorldTransform();
+
+	mat4x4 pos;
+	transB.getOpenGLMatrix(&pos);
+	pos.M[13] += offset.getY();
+	transB.setFromOpenGLMatrix(&pos);
+
+	btFixedConstraint* cons = new btFixedConstraint(bodyA, *(bodyB.body), transB, bodyA.getWorldTransform());
+
+	world->addConstraint(cons, true);
+	constraints.add(cons);
+	cons->setDbgDrawSize(2.0f);
+	return cons;
+}
 
 // =============================================
 void DebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color)

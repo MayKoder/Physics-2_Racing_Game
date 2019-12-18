@@ -17,8 +17,8 @@ bool ModuleMap::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
-	WinSound = App->audio->LoadFx("sfx/WinSoundEffect.wav");
-	BoostSound = App->audio->LoadFx("sfx/BoostSoundEffect.wav");
+	winSound = App->audio->LoadFx("sfx/WinSoundEffect.wav");
+	boostSound = App->audio->LoadFx("sfx/BoostSoundEffect.wav");
 	App->audio->PlayMusic("music/DejaVu.ogg");
 
 	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));

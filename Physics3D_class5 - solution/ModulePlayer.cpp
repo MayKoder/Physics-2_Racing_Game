@@ -291,7 +291,7 @@ void ModulePlayer::FinishGame()
 	if (!game_finished)
 	{
 		App->audio->StopMusic(0.f);
-		App->audio->PlayFx(App->map->WinSound);
+		App->audio->PlayFx(App->map->winSound);
 		game_finished = true;
 	}
 }

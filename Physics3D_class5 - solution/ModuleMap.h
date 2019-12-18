@@ -47,8 +47,8 @@ public:
 	Sphere s_snake2[MAX_SNAKE];
 	*/
 
-	int WinSound;
-	int BoostSound;
+	int winSound;
+	int boostSound;
 
 	PhysBody3D* pb_chassis;
 	Cube p_chassis;

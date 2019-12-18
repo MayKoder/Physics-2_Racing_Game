@@ -41,6 +41,7 @@ void PhysVehicle3D::Render()
 	}
 
 	Cube chassis(info.chassis_size.x, info.chassis_size.y, info.chassis_size.z);
+	chassis.color = Purple;
 	vehicle->getChassisWorldTransform().getOpenGLMatrix(&chassis.transform);
 	btQuaternion q = vehicle->getChassisWorldTransform().getRotation();
 	btVector3 offset(info.chassis_offset.x, info.chassis_offset.y, info.chassis_offset.z);
@@ -49,18 +50,42 @@ void PhysVehicle3D::Render()
 	chassis.transform.M[13] += offset.getY();
 	chassis.transform.M[14] += offset.getZ();
 
-	Cube a(1, 1,1);
+	Cube a(0.5, 0.8,0.8);
 	vehicle->getChassisWorldTransform().getOpenGLMatrix(&a.transform);
 	q = vehicle->getChassisWorldTransform().getRotation();
-	btVector3 b_offset = {0, 2, 0 };
+	btVector3 a_offset = {0, 2, 1.2 };
+	a_offset = a_offset.rotate(q.getAxis(), q.getAngle());
+	a.transform.M[12] += a_offset.getX();
+	a.transform.M[13] += a_offset.getY();
+	a.transform.M[14] += a_offset.getZ();
+	a.color = Grey;
+
+	Cube b(1.4, 1.5,1.5);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&b.transform);
+	q = vehicle->getChassisWorldTransform().getRotation();
+	btVector3 b_offset = {0, 2, -0.2 };
 	b_offset = b_offset.rotate(q.getAxis(), q.getAngle());
-	a.transform.M[12] += b_offset.getX();
-	a.transform.M[13] += b_offset.getY();
-	a.transform.M[14] += b_offset.getZ();
-	a.color = Black;
+	b.transform.M[13] += b_offset.getY();
+	b.transform.M[14] += b_offset.getZ();
+	b.transform.M[12] += b_offset.getX();
+	b.color = White;	
+	
+	Cube c(1.4, 1.5,1.5);
+	vehicle->getChassisWorldTransform().getOpenGLMatrix(&b.transform);
+	q = vehicle->getChassisWorldTransform().getRotation();
+	btVector3 c_offset = {0, 2, -0.2 };
+	c_offset = c_offset.rotate(q.getAxis(), q.getAngle());
+	c.transform.M[13] += c_offset.getY();
+	c.transform.M[14] += c_offset.getZ();
+	c.transform.M[12] += c_offset.getX();
+	c.color = White;
+
+
+
 
 
 	a.Render();
+	b.Render();
 	chassis.Render();
 }
 

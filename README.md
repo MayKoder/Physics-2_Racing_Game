@@ -16,7 +16,7 @@ This time we've been asked to code the core for a Racing Game using Bullet, Open
 
 ## Goal
 
-The main goal is to get to the end of the map while activating all the checkpoints, but be careful, if you fall off the map, you will be sent to the last checkpoint. You will need to think ahead of the gravity changes, because they can 'flip' your mind.<br>
+The main goal is to get to the end of the map while activating all the checkpoints, but be careful, if you fall off the map you will be sent to the last checkpoint. You'll need to think ahead of the gravity changes, because they can 'flip' your mind.<br>
 
 ## Debug Controls
 

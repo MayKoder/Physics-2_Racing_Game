@@ -21,3 +21,4 @@ This time we've been asked to code the core for a Racing Game using Bullet, Open
 * F3: Kill and respawn from start
 * F4: Camera unfollows/follows car position
 * Arrow keys while camera isn't following car: Move camerafreely through the map.
+* R F while camera isn't following car: Up/down camera 

@@ -14,6 +14,10 @@ This time we've been asked to code the core for a Racing Game using Bullet, Open
 
 * WASD: Move car
 
+## Goal
+
+The main goal is to get to the end of the map while activating all the checkpoints, but be careful, if you fall off the map, you will be sent to the last checkpoint. You will need to think ahead of the gravity changes, because they can 'flip' your mind.<br>
+
 ## Debug Controls
 
 * F1: Debug Mode to see sensors.
@@ -22,3 +26,7 @@ This time we've been asked to code the core for a Racing Game using Bullet, Open
 * F4: Camera unfollows/follows car position
 * Arrow keys while camera isn't following car: Move camerafreely through the map.
 * R F while camera isn't following car: Up/down camera 
+
+## Guide to finish the game
+
+The game is really straight forward, follow the circuit and you will get to the end, think ahead before rushing into a gravity change.<br>

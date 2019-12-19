@@ -142,7 +142,6 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 
 					}
 				}
-
 			}
 			else 
 			{
@@ -166,7 +165,6 @@ update_status ModulePhysics3D::PreUpdate(float dt)
 
 		}
 	}
-
 	return UPDATE_CONTINUE;
 }
 
@@ -175,7 +173,6 @@ void ModulePhysics3D::ChangeGravityBySensor(PhysSensor3D* sensor)
 
 	//Set new gravity
 	SetGravity(sensor->gravityMod);
-
 
 	App->camera->cameraOffset = { 0.f, (sensor->gravityMod.y * -1) + 6, 0.f };
 
@@ -199,9 +196,12 @@ void ModulePhysics3D::ChangeGravityBySensor(PhysSensor3D* sensor)
 	}
 
 	angle = sensor->targetRot.x;
+
 	App->player->vehicle->current_angle = App->player->vehicle->vehicle->getRigidBody()->getWorldTransform().getRotation().getAngle();
+
 	App->player->vehicle->SmoothRotation(sensor->targetRot.x, vec3(sensor->targetRot.y, sensor->targetRot.z, sensor->targetRot.w));
 	App->camera->cameraOffset = vec3(offsetX, offsetY, offsetZ);
+
 	App->player->speed_bost = false;
 	
 	//TEMPORAL

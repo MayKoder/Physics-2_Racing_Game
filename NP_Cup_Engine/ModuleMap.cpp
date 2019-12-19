@@ -18,15 +18,17 @@ bool ModuleMap::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 
+	//Camera init
+	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
+	App->camera->LookAt(vec3(0, 0, 0));
+
+	//Audio Load
 	winSound = App->audio->LoadFx("sfx/WinSoundEffect.wav");
 	boostSound = App->audio->LoadFx("sfx/BoostSoundEffect.wav");
 	yaaySound = App->audio->LoadFx("sfx/YaaySoundEffect.wav");
 	deathSound = App->audio->LoadFx("sfx/DeathSoundEffect.wav");
 	sensorSound = App->audio->LoadFx("sfx/GravitySensorEffect.wav");
 	App->audio->PlayMusic("music/DejaVu.ogg");
-
-	App->camera->Move(vec3(1.0f, 1.0f, 0.0f));
-	App->camera->LookAt(vec3(0, 0, 0));
 
 	//Create map
 	FirstPhaseObjects();
@@ -57,8 +59,6 @@ update_status ModuleMap::Update(float dt)
 	p.axis = true;
 	p.Render();
 
-	
-
 	for (int i = 0; i < obs_bodys.Count(); i++)
 	{
 		obs_bodys[i]->GetTransform(&obs_primitives[i]->transform);
@@ -87,7 +87,6 @@ update_status ModuleMap::Update(float dt)
 		item = item->next;
 	}
 
-
 	return UPDATE_CONTINUE;
 }
 
@@ -113,8 +112,6 @@ PhysBody3D* ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius
 {
 	Cylinder* object = new Cylinder();
 
-
-	
 	object->SetPos(position.x, position.y, position.z);
 	object->color = s_color;
 	object->SetRotation(rotation.x, { rotation.y, rotation.z, rotation.w });
@@ -128,7 +125,6 @@ PhysBody3D* ModuleMap::CreateCylinder(vec3 position, vec4 rotation, float radius
 
 void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_color, SensorType s_type, vec3 mod, vec4 target_rotation)
 {
-
 	Cube* object = new Cube();
 
 	object->SetPos(position.x, position.y, position.z);
@@ -145,8 +141,6 @@ void ModuleMap::CreateSensor(vec3 position, vec4 rotation, vec3 size, Color s_co
 	{
 		map_sensors.add(App->physics->AddSensor(*object, mod, s_type, target_rotation));
 	}
-
-
 }
 
 void ModuleMap::FirstPhaseObjects()
@@ -607,10 +601,8 @@ void ModuleMap::CreateSensors()
 	//-------------SPEED----------------
 
 	CreateSensor({ -50,1,137 }, { 90,0,0,1 }, { 10,0.1f,14 }, White, SensorType::SPEEDBOOST, { 0,10,0 });
-
 	CreateSensor({ -44,45,57 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::SPEEDBOOST, { 0,0,-10 });
-
-	CreateSensor({ 30, 15, 95 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::SUPERSPEEDBOOST, { 0,0,-10 });
+	CreateSensor({ 30, 15, 95 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::SPEEDBOOST, { 0,0,-10 });
 
 	//------------GRAVITY-------------
 	//First gravity change
@@ -643,9 +635,7 @@ void ModuleMap::CreateSensors()
 
 	//--------------CHECKPOINTS----------------
 	CreateSensor({ -130,32,85 }, { 90,1,0,0 }, { 20,0.1f,14 }, White, SensorType::CHECKPOINT, { 0,0,0 }, {180, 0, 1, 0});
-
 	CreateSensor({ -44, 41.6, 69.7 }, { 0,1,0,0 }, { 23,0.1f,19 }, White, SensorType::CHECKPOINT, { 0,0,0 }, { 180, 0, 1, 0 });
-
 	CreateSensor({ 34,7,-65 }, { 0,1,0,0 }, { 15,0.2f,25 }, White, SensorType::CHECKPOINT, { 0,0,0 }, { 0, 0, -1, 0 });
 
 	//--------------ENDINGPOINTS---------------
@@ -654,33 +644,21 @@ void ModuleMap::CreateSensors()
 
 	//--------------RESPAWN--------------------
 	CreateSensor({ -145,1,0 }, { 0,0,0,1 }, { 110,0.1f,410 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ -145,55,145 }, { 0,0,0,1 }, { 110,0.1f,120 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ -35,1,175 }, { 0,0,0,1 }, { 110,0.1f,50 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ -65,1,85 }, { 90,0,1,0 }, { 70,0.1f,50 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ -50,1,-40 }, { 90,0,1,0 }, { 185,0.1f,80 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ 40,1,-50 }, { 90,0,1,0 }, { 100,0.1f,115 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ 55,1,100 }, { 90,0,1,0 }, { 230,0.1f,90 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ -44, 20.6, 69.7 }, { 0,1,0,0 }, { 70,0.1f,70 }, White, SensorType::RESPAWN, { 0,0,0 }, { 180, 0, 1, 0 });
-
 	CreateSensor({ 0, 1, 41 }, { 0,1,0,0 }, { 6,0.1f,8 }, White, SensorType::RESPAWN, { 0,0,0 }, { 180, 0, 1, 0 });
 
 
 	//CUBE LIMITS
 	CreateSensor({ -50,80,-200 }, { 90,1,0,0 }, { 300,0.1f,185 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ 100,80,0 }, { -90,0,0,1 }, { 185,0.1f,400 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ -50,80,200 }, { 90,1,0,0 }, { 300,0.1f,185 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ -200,80,0 }, { -90,0,0,1 }, { 185,0.1f,400 }, White, SensorType::RESPAWN, { 0,0,0 });
-
 	CreateSensor({ -10,120,0 }, { 90,0,1,0 }, { 400,0.1f,300 }, White, SensorType::RESPAWN, { 0,0,0 });
 
 }
@@ -690,7 +668,7 @@ void ModuleMap::CreateConstrains()
 	obs_bodys.PushBack(CreateRectangle({ 30, 25, 55 }, { 0, 0, 0, 1 }, { 10, 1, 5 }, White, 500.f));
 	obs_primitives.PushBack(map_objects.getLast()->data);
 	App->physics->AddConstraintHinge(*CreateCylinder({ 30, 25, 55 }, { 90, 0, 1, 0 }, 0.2f, 6, Red),
-		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true)->enableAngularMotor(true, 350, 350);
+		*obs_bodys[0], { 0, 0, 0 }, { 0, 0, 0 }, { 1, 0, 0 }, { 0, 0, 0 }, true)->enableAngularMotor(true, 100, 100);
 
 	obs_bodys.PushBack(CreateRectangle({ 40, 25, 55 }, { 0, 0, 0, 1 }, { 3, 1, 5 }, Blue, 500.f));
 	obs_primitives.PushBack(map_objects.getLast()->data);

@@ -5,13 +5,11 @@
 
 struct PhysVehicle3D;
 
-#define MAX_ACCELERATION 1000.0f	   // Previous 6000.0f
-#define TURN_DEGREES 20.0f * DEGTORAD  // Previous 20.0.0f
+#define MAX_BOOST_ACCELERATION 2500.0f
+#define MAX_ACCELERATION 1000.0f	   
+#define TURN_DEGREES 20.0f * DEGTORAD  
 #define BRAKE_POWER 250.0f
 
-
-
-#define MAX_BOOST_ACCELERATION 3000.0f
 
 
 
@@ -30,8 +28,6 @@ public:
 	void LastCheckPoint();
 	void FinishGame();
 
-
-
 public:
 
 	PhysVehicle3D* vehicle;
@@ -44,13 +40,8 @@ public:
 	bool super_boost;
 	bool game_finished;
 
-
 	Cylinder* wheels[4];
-	PhysBody3D* pb_wheels[4];
-	Cube* cabin[4];
-	PhysBody3D* pb_cabin;
 
 private:
 	float restart_timer;
-
 };

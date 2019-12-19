@@ -12,8 +12,6 @@ ModuleCamera3D::ModuleCamera3D(Application* app, bool start_enabled) : Module(ap
 	Y = vec3(0.0f, 1.0f, 0.0f);
 	Z = vec3(0.0f, 0.0f, 1.0f);
 
-
-
 	cameraOffset = { 0.f, 4.f, 0.f };
 	Position = vec3(0.0f, 0.0f, 5.0f);
 	Reference = vec3(0.0f, 0.0f, 0.0f);
@@ -43,12 +41,9 @@ bool ModuleCamera3D::CleanUp()
 // -----------------------------------------------------------------
 update_status ModuleCamera3D::Update(float dt)
 {
-	// Implement a debug camera with keys and mouse
-	// Now we can make this movememnt frame rate independant!
-
+	//Camera debug mode
 	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN && !App->player->game_finished)
 		followCar = !followCar;
-
 
 	if (!followCar) 
 	{
@@ -109,13 +104,12 @@ update_status ModuleCamera3D::Update(float dt)
 	}
 	else
 	{
-
-		//Get vehicle position
 		currVehicle->GetTransform(&followPoint);
 
 		const vec3 carPos = { followPoint.M[12], followPoint.M[13], followPoint.M[14] };
-
 		btVector3 carZVector = { currVehicle->vehicle->getForwardVector().getX(), 0, currVehicle->vehicle->getForwardVector().getZ() };
+
+		//Camera rotation to top view on walls
 		if (App->physics->GetGravity().getZ() < 0) 
 		{
 			carZVector.setX(0);
@@ -146,8 +140,6 @@ update_status ModuleCamera3D::Update(float dt)
 
 	}
 	
-
-	// Recalculate matrix -------------
 	CalculateViewMatrix();
 
 	return UPDATE_CONTINUE;

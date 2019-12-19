@@ -27,7 +27,6 @@ public:
 	
 	vec3 X, Y, Z, Position, Reference;
 
-	//Car info
 	PhysVehicle3D* currVehicle;
 	bool followCar;
 

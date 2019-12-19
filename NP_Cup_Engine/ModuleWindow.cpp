@@ -69,6 +69,11 @@ bool ModuleWindow::Init()
 		}
 	}
 
+	//Title Init
+	char title[80];
+	sprintf_s(title, "Racing Game: NP CUP");
+	SetTitle(title);
+
 	return ret;
 }
 

@@ -9,11 +9,11 @@ class btRigidBody;
 class Module;
 
 enum SensorType {
+
 	CHECKPOINT,
 	GRAVITYMOD,
 	FINISHLINE,
 	SPEEDBOOST,
-	SUPERSPEEDBOOST,
 	RESPAWN,
 };
 

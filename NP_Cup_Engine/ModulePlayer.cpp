@@ -24,9 +24,6 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	respawn = false;
 
-
-
-
 	VehicleInfo car;
 	
 	// Car properties ----------------------------------------
@@ -127,7 +124,6 @@ update_status ModulePlayer::PreUpdate(float dt)
 
 	if (vehicle->rotating)
 	{
-		//TODO: Make rotations smooth
 		float increment = 0.15f;
 
 		//Get vehicle transform and rotation quaternion
@@ -153,10 +149,6 @@ update_status ModulePlayer::PreUpdate(float dt)
 		vehicle->rotating = false;
 	}
 
-#pragma region SmoothRotationIB
-
-#pragma endregion
-
 	return UPDATE_CONTINUE;
 }
 
@@ -166,7 +158,7 @@ update_status ModulePlayer::Update(float dt)
 {
 	turn = acceleration = brake = 0.0f;
 
-
+	//Camera lerp backwards
 	if (game_finished)
 	{
 		if (App->camera->followCar) App->camera->followCar = false;
@@ -269,12 +261,6 @@ update_status ModulePlayer::Update(float dt)
 
 	vehicle->Render();
 
-
-
-	char title[80];
-	sprintf_s(title, "%.1f Km/h", vehicle->GetKmh());
-	App->window->SetTitle(title);
-
 	return UPDATE_CONTINUE;
 }
 
@@ -329,19 +315,9 @@ void ModulePlayer::LastCheckPoint()
 	{
 		//Correct position and rotation
 		carMatrix.rotate(lastCheckPoint->targetRot.x, { lastCheckPoint->targetRot.y, lastCheckPoint->targetRot.z, lastCheckPoint->targetRot.w });
-		//-44,5,140
 		mat4x4 checkPointMat;
 		lastCheckPoint->GetTransform(&checkPointMat);
 		carMatrix.translate(checkPointMat[12], checkPointMat[13], checkPointMat[14]);
-	}
-	else
-	{
-		//Correct position and rotation
-		carMatrix.rotate(0, { 0, 1, 0 });
-		//-44,5,140
-		//30, 20, -20
-		//-40, 47.6, 69.7
-		carMatrix.translate(30, 20, -20);
 	}
 
 	//Set corrected transform

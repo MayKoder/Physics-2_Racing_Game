@@ -110,14 +110,6 @@ bool ModulePlayer::Start()
 	vehicle = App->physics->AddVehicle(car);
 	vehicle->SetPos(car.spawnPoint.x, car.spawnPoint.y, car.spawnPoint.z -5);
 	App->camera->currVehicle = vehicle;
-
-
-	//Create cubes
-	//pb_cabin = App->map->CreateRectangle({ 0, 3, -6 }, { 0, 0, 0, 1 }, { 1, 1, 2 }, White, 1);
-	//App->map->obs_bodys.PushBack(pb_cabin);
-	//App->map->obs_primitives.PushBack(App->map->map_objects.getLast()->data);
-
-	//App->physics->AddFixedConstrain(*App->player->vehicle->vehicle->getRigidBody(),*pb_cabin, { 0,3,0 });
 	
 	return true;
 }
@@ -201,11 +193,11 @@ update_status ModulePlayer::Update(float dt)
 	}
 
 	//Respawn car to last spawnPosition
-	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_DOWN && !respawn)
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN && !respawn)
 	{
 		RespawnCar();
 	}
-	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN && !respawn)
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && !respawn)
 	{
 		LastCheckPoint();
 	}

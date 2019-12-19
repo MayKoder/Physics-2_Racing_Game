@@ -46,7 +46,7 @@ update_status ModuleCamera3D::Update(float dt)
 	// Implement a debug camera with keys and mouse
 	// Now we can make this movememnt frame rate independant!
 
-	if (App->input->GetKey(SDL_SCANCODE_Q) == KEY_DOWN && !App->player->game_finished)
+	if (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN && !App->player->game_finished)
 		followCar = !followCar;
 
 
@@ -133,15 +133,14 @@ update_status ModuleCamera3D::Update(float dt)
 		}
 		else
 		{
-			carZVector.normalize();  //Normalitzem el vector per a que tingui modul 1
+			carZVector.normalize();
 		}
 
-		carZVector *= -10;           //Tenim un vector que va 10 unitats darrera del cotxe, arran de terra
+		carZVector *= -10;
 
 		vec3 carVectorVec3 = { carZVector.getX(), carZVector.getY(), carZVector.getZ()};
-		//carVectorVec3.z -= 10;
 
-		Position = carPos + carVectorVec3 + cameraOffset;   //Podem ajustar l'alçada de la camara
+		Position = carPos + carVectorVec3 + cameraOffset;
 
 		LookAt(carPos);
 

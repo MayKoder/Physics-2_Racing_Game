@@ -1,2 +1,4 @@
-Follow and unfollow car with Q
-Kill and respawn with K
+Debug mode with F1
+Last Checkpoint with F2
+Kill and respawn with F3
+Follow and unfollow car with F4

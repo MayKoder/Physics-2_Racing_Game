@@ -39,4 +39,4 @@ enum update_status
 #define WIN_BORDERLESS false
 #define WIN_FULLSCREEN_DESKTOP true
 #define VSYNC true
-#define TITLE "Racing Game: NP CUP"
+#define TITLE "Unknown Engine"

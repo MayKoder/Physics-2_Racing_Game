@@ -71,7 +71,7 @@ bool ModuleWindow::Init()
 
 	//Title Init
 	char title[80];
-	sprintf_s(title, "Racing Game: NP CUP");
+	sprintf_s(title, "Unknown Engine");
 	SetTitle(title);
 
 	return ret;
@@ -89,6 +89,7 @@ bool ModuleWindow::CleanUp()
 	}
 
 	//Quit SDL subsystems
+	
 	SDL_Quit();
 	return true;
 }
